@@ -35,7 +35,8 @@ public class AuthorService {
                             "books " +
                     "WHERE " +
                             "author LIKE  UPPER('" + letter + "%') OR " +
-                            "author LIKE LOWER('" + letter + "%')";
+                            "author LIKE LOWER('" + letter + "%') " +
+                    "GROUP BY author";
             List<Author> authors = jdbcTemplate.query(query,
                     (ResultSet rs, int rowNum) -> {
                         Author author = new Author();
