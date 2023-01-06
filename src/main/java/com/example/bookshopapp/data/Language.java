@@ -1,2 +1,6 @@
-package com.example.bookshopapp.data;public enum Language {
+package com.example.bookshopapp.data;
+
+public enum Language {
+
+        RUS, ENG
 }
