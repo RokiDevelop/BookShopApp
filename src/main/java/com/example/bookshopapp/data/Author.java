@@ -19,14 +19,18 @@ public class Author {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @JoinColumn(name = "name")
-    private String name;
+    @JoinColumn(name = "first_name")
+    private String firstName;
+
+    @JoinColumn(name = "last_name")
+    private String lastName;
 
     @Override
     public String toString() {
         return "Author{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 '}';
     }
 
