@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="Cards Cards_refresh" th:fragment="pool (category, booksList)">
+    <div class="Card" th:each="book : ${booksList}">
+        <div class="Card-picture"><a href="#" th:href="${book.id}"><img src="/assets/img/content/main/card.jpg" alt="card.jpg"/></a>
+            <div class="Card-sale" th:if="${book.priceOld != null}" th:text="#{item.card-sale}">Скидка
+            </div>
+            <div class="Card-ribbon"><span class="Card-ribbonText" th:if="${true}" th:text="#{item.card-ribbon}">Бестселлер</span>
+            </div>
+            <a class="Card-status" title="Куплена" th:if="${true}"><img src="/assets/img/icons/check.svg" alt="check.svg"/></a>
+        </div>
+        <div class="Card-content">
+            <strong class="Card-title"><a href="#" th:href="${book.id}" th:text="${book.title}">Великая Отечественная война. 1941-1945</a>
+            </strong>
+            <div class="Card-description" th:text="${book.author}">Солопенко Алла, Меркулов Дмитрий
+            </div>
+            <div class="Card-cost">
+                <span class="Card-priceOld" th:if="${book.priceOld != null}" th:text="${book.priceOld}">₽50.00</span>
+                <span class="Card-price" th:text="${book.price}">₽50.00</span>
+            </div>
+        </div>
+    </div>
+    <div class="Cards-footer Cards-footer_center"><a class="btn btn_primary" href="#" th:attr="data-refreshshow = ${category}" data-refreshshow="recent"
+                                                     data-refreshoffset="20" data-refreshlimit="20" th:text="#{ui-element.show-more}">Показать еще</a>
+    </div>
+</div>
+</html>
