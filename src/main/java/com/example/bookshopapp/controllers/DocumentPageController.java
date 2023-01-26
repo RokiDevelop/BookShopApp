@@ -7,16 +7,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/genres")
-public class GenresPageController {
+@RequestMapping("/documents")
+public class DocumentPageController {
 
     @GetMapping("")
-    public String genresPage(){
-        return "genres/index";
+    public String documentsPage() {
+        return "documents/index";
     }
 
+
     @GetMapping("/{id}")
-    public String genresById(@PathVariable(value = "id") int id, Model model){
-        return "genres/slug";
+    public String documentById(@PathVariable(value = "id") int id, Model model) {
+        return "documents/slug";
     }
+
 }
