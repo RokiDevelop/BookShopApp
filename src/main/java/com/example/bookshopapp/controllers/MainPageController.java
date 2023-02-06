@@ -1,8 +1,6 @@
 package com.example.bookshopapp.controllers;
 
 import com.example.bookshopapp.data.Book;
-import com.example.bookshopapp.data.BookFile;
-import com.example.bookshopapp.services.BookFileService;
 import com.example.bookshopapp.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,12 +12,10 @@ import java.util.List;
 public class MainPageController {
 
     private final BookService bookService;
-    private final BookFileService bookFileService;
 
     @Autowired
-    public MainPageController(BookService bookService, BookFileService bookFileService) {
+    public MainPageController(BookService bookService) {
         this.bookService = bookService;
-        this.bookFileService = bookFileService;
     }
 
     @ModelAttribute(value = "bookDataRecommendation")
@@ -39,7 +35,6 @@ public class MainPageController {
 
     @GetMapping("")
     public String mainPage(){
-        BookFile bf = bookFileService.getBookFileById(1L);
         return "/index";
     }
 

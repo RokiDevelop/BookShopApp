@@ -4,7 +4,6 @@ import com.example.bookshopapp.data.Author;
 import com.example.bookshopapp.data.Book;
 import com.example.bookshopapp.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -34,11 +33,8 @@ public class BookService {
     }
 
     public List<Book> getBooksByAuthor(Author author) {
-
-        Iterator<Book> iterator = bookRepository.findByAuthorId(author.getId()).iterator();
-        //TODO: create select booksByAuthor
-        List<Book> books = new ArrayList<>();
-        iterator.forEachRemaining(books::add);
+        Set<Integer>  booksId = bookRepository.findBooksByAuthorId(author.getId());
+        List<Book> books = bookRepository.findBooksByIdList(booksId);
         return books;
     }
 

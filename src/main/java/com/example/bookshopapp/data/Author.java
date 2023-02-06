@@ -1,5 +1,6 @@
 package com.example.bookshopapp.data;
 
+import com.example.bookshopapp.data.book.links.Book2AuthorEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "authors")
+@Table(name = "author")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -20,22 +21,15 @@ public class Author {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @JoinColumn(name = "first_name")
-    private String firstName;
+    @Column(name = "photo", columnDefinition = "VARCHAR(255)")
+    private String photo;
 
-    @JoinColumn(name = "last_name")
-    private String lastName;
+    @Column(name = "slug", columnDefinition = "VARCHAR(255)", nullable = false)
+    private String slug;
 
-    @OneToMany(mappedBy = "author")
-    private Set<Book2Author> book2AuthorSet;
+    @Column(name = "name", columnDefinition = "VARCHAR(255)", nullable = false)
+    private String name;
 
-    @Override
-    public String toString() {
-        return firstName + ' ' + lastName;
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
 }

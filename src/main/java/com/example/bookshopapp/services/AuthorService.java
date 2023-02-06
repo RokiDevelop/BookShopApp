@@ -20,7 +20,7 @@ public class AuthorService {
 
     public Map<String, List<Author>> getAuthorMapByLetter() {
         List<Author> authors = authorRepository.findAll();
-        return authors.stream().collect(Collectors.groupingBy(author -> author.getLastName().substring(0,1)));
+        return authors.stream().collect(Collectors.groupingBy(author -> author.getName().substring(0,1)));
     }
 
     public Author getAuthorById(int id) {
