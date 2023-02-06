@@ -1,5 +1,6 @@
 package com.example.bookshopapp.data;
 
+import com.example.bookshopapp.data.book.links.Book2AuthorEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "books")
+@Table(name = "book")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -21,40 +22,46 @@ public class Book {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @JoinColumn(name = "pub_date")
+    @Column(name = "pub_date", nullable = false)
     private Date pubDate;
 
-    private boolean isBestseller;
+    @Column(name = "is_bestseller", columnDefinition = "SMALLINT", nullable = false)
+    private byte isBestseller;
 
+    @Column(name = "slug", columnDefinition = "VARCHAR(255)", nullable = false)
     private String slug;
 
-    @JoinColumn(name = "title")
+    @Column(name = "title", columnDefinition = "VARCHAR(255)", nullable = false)
     private String title;
 
+    @Column(name = "image", columnDefinition = "VARCHAR(255)")
     private String image;
 
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @JoinColumn(name = "discount")
-    private String discount;
+    @Column(name = "price", nullable = false)
+    private Integer price;
 
-    @JoinColumn(name = "price")
-    private String price;
+    @Column(name = "discount", columnDefinition = "SMALLINT default 0", nullable = false)
+    private byte discount;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "book_file_id", referencedColumnName = "id")
-    private BookFile bookFile;
-
-    @OneToMany(mappedBy = "book")
-    private Set<Book2Author> book2AuthorSet;
+    @OneToMany(mappedBy = "bookId")
+    private Set<Book2AuthorEntity> book2AuthorSet;
 
     @Override
-    public boolean equals(Object o) {
-        return super.equals(o);
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", pubDate=" + pubDate +
+                ", isBestseller=" + isBestseller +
+                ", slug='" + slug + '\'' +
+                ", title='" + title + '\'' +
+                ", image='" + image + '\'' +
+                ", description='" + description + '\'' +
+                ", discount='" + discount + '\'' +
+                ", price='" + price + '\'' +
+                ", book2AuthorSet=" + book2AuthorSet +
+                '}';
     }
 }
