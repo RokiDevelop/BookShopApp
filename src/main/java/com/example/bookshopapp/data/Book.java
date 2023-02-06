@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "books")
@@ -14,34 +16,37 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class Book {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @JoinColumn(name = "author")
-    private String author;          //make type field Set<Author> or List<Author>, many-to-many relationship with
+    @JoinColumn(name = "pub_date")
+    private Date pubDate;
+
+    private boolean isBestseller;
+
+    private String slug;
 
     @JoinColumn(name = "title")
     private String title;
 
-    @JoinColumn(name = "price_old")
-    private String priceOld;
+    private String image;
+
+    private String description;
+
+    @JoinColumn(name = "discount")
+    private String discount;
 
     @JoinColumn(name = "price")
     private String price;
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", author='" + author + '\'' +
-                ", title='" + title + '\'' +
-                ", priceOld='" + priceOld + '\'' +
-                ", price='" + price + '\'' +
-                '}';
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "book_file_id", referencedColumnName = "id")
+    private BookFile bookFile;
+
+    @OneToMany(mappedBy = "book")
+    private Set<Book2Author> book2AuthorSet;
 
     @Override
     public boolean equals(Object o) {

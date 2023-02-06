@@ -15,32 +15,26 @@ public class BookService {
     private final BookRepository bookRepository;
 
     @Autowired
-    public List<Book> getBooksData() {
-        Iterator<Book> iterator = bookRepository.findAll().iterator();
-        List<Book> books = new ArrayList<>();
-        iterator.forEachRemaining(books::add);
-        return books;
-    }
-
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 
-    public Book getBookById(int id) throws Exception {
-        Optional<Book> optionalBook = bookRepository.findById(id);
-        if (optionalBook.isPresent()) {
-            return optionalBook.get();
-        }
-        throw new Exception();
+    public List<Book> getBooksData() {
+        return bookRepository.findAll();
+    }
+
+    public Book getBookById(int id) {
+        return bookRepository.getReferenceById(id);
     }
 
     public List<Book> getRandomBooksData() {
         List<Book> list = getBooksData();
         Collections.shuffle(list);
-        return new ArrayList<>(list);
+        return list;
     }
 
     public List<Book> getBooksByAuthor(Author author) {
+
         Iterator<Book> iterator = bookRepository.findByAuthorId(author.getId()).iterator();
         //TODO: create select booksByAuthor
         List<Book> books = new ArrayList<>();

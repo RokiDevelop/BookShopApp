@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "authors")
@@ -25,13 +26,12 @@ public class Author {
     @JoinColumn(name = "last_name")
     private String lastName;
 
+    @OneToMany(mappedBy = "author")
+    private Set<Book2Author> book2AuthorSet;
+
     @Override
     public String toString() {
-        return "Author{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
+        return firstName + ' ' + lastName;
     }
 
     @Override
