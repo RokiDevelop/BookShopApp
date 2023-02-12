@@ -13,9 +13,6 @@ import java.util.Set;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
 
-    @Query("select Book2AuthorEntity.bookId from Book2AuthorEntity b where b.authorId = ?1")  //TODO: ERROR!!!!
-    Set<Integer> findBooksByAuthorId(Integer id);
-
     @Query(value = "SELECT b FROM Book b WHERE b.id = :ids")
     List<Book> findBooksByIdList(@Param("ids") Collection<Integer> booksId);
 }

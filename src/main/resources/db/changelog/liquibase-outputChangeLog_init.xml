@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="Roman (generated)" id="1676194662474-1">
+        <createSequence sequenceName="author_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-2">
+        <createSequence sequenceName="author_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-3">
+        <createSequence sequenceName="author_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-4">
+        <createSequence sequenceName="author_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-5">
+        <createSequence sequenceName="author_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-6">
+        <createSequence sequenceName="author_id_seq5"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-7">
+        <createSequence sequenceName="balance_transaction_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-8">
+        <createSequence sequenceName="balance_transaction_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-9">
+        <createSequence sequenceName="balance_transaction_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-10">
+        <createSequence sequenceName="balance_transaction_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-11">
+        <createSequence sequenceName="balance_transaction_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-12">
+        <createSequence sequenceName="book2author_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-13">
+        <createSequence sequenceName="book2author_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-14">
+        <createSequence sequenceName="book2author_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-15">
+        <createSequence sequenceName="book2author_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-16">
+        <createSequence sequenceName="book2author_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-17">
+        <createSequence sequenceName="book2genre_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-18">
+        <createSequence sequenceName="book2genre_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-19">
+        <createSequence sequenceName="book2genre_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-20">
+        <createSequence sequenceName="book2genre_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-21">
+        <createSequence sequenceName="book2genre_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-22">
+        <createSequence sequenceName="book2user_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-23">
+        <createSequence sequenceName="book2user_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-24">
+        <createSequence sequenceName="book2user_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-25">
+        <createSequence sequenceName="book2user_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-26">
+        <createSequence sequenceName="book2user_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-27">
+        <createSequence sequenceName="book2user_type_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-28">
+        <createSequence sequenceName="book2user_type_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-29">
+        <createSequence sequenceName="book2user_type_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-30">
+        <createSequence sequenceName="book2user_type_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-31">
+        <createSequence sequenceName="book2user_type_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-32">
+        <createSequence sequenceName="book_file_type_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-33">
+        <createSequence sequenceName="book_file_type_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-34">
+        <createSequence sequenceName="book_file_type_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-35">
+        <createSequence sequenceName="book_file_type_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-36">
+        <createSequence sequenceName="book_file_type_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-37">
+        <createSequence sequenceName="book_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-38">
+        <createSequence sequenceName="book_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-39">
+        <createSequence sequenceName="book_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-40">
+        <createSequence sequenceName="book_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-41">
+        <createSequence sequenceName="book_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-42">
+        <createSequence sequenceName="book_review_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-43">
+        <createSequence sequenceName="book_review_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-44">
+        <createSequence sequenceName="book_review_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-45">
+        <createSequence sequenceName="book_review_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-46">
+        <createSequence sequenceName="book_review_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-47">
+        <createSequence sequenceName="book_review_like_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-48">
+        <createSequence sequenceName="book_review_like_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-49">
+        <createSequence sequenceName="book_review_like_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-50">
+        <createSequence sequenceName="book_review_like_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-51">
+        <createSequence sequenceName="book_review_like_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-52">
+        <createSequence sequenceName="document_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-53">
+        <createSequence sequenceName="document_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-54">
+        <createSequence sequenceName="document_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-55">
+        <createSequence sequenceName="document_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-56">
+        <createSequence sequenceName="document_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-57">
+        <createSequence sequenceName="faq_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-58">
+        <createSequence sequenceName="faq_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-59">
+        <createSequence sequenceName="faq_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-60">
+        <createSequence sequenceName="faq_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-61">
+        <createSequence sequenceName="faq_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-62">
+        <createSequence sequenceName="file_download_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-63">
+        <createSequence sequenceName="file_download_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-64">
+        <createSequence sequenceName="file_download_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-65">
+        <createSequence sequenceName="file_download_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-66">
+        <createSequence sequenceName="file_download_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-67">
+        <createSequence sequenceName="genre_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-68">
+        <createSequence sequenceName="genre_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-69">
+        <createSequence sequenceName="genre_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-70">
+        <createSequence sequenceName="genre_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-71">
+        <createSequence sequenceName="genre_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-72">
+        <createSequence sequenceName="hibernate_sequence"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-73">
+        <createSequence sequenceName="message_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-74">
+        <createSequence sequenceName="message_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-75">
+        <createSequence sequenceName="message_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-76">
+        <createSequence sequenceName="message_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-77">
+        <createSequence sequenceName="message_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-78">
+        <createSequence sequenceName="user_contact_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-79">
+        <createSequence sequenceName="user_contact_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-80">
+        <createSequence sequenceName="user_contact_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-81">
+        <createSequence sequenceName="user_contact_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-82">
+        <createSequence sequenceName="user_contact_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-83">
+        <createSequence sequenceName="users_id_seq"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-84">
+        <createSequence sequenceName="users_id_seq1"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-85">
+        <createSequence sequenceName="users_id_seq2"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-86">
+        <createSequence sequenceName="users_id_seq3"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-87">
+        <createSequence sequenceName="users_id_seq4"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-88">
+        <createTable tableName="author">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="author_pkey"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="photo" type="VARCHAR(255)"/>
+            <column name="slug" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-90">
+        <createTable tableName="book">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="book_pkey"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column defaultValueNumeric="0" name="discount" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image" type="VARCHAR(255)"/>
+            <column name="is_bestseller" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pub_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="slug" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-89">
+        <createTable tableName="balance_transaction">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="balance_transaction_pkey"/>
+            </column>
+            <column name="book_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="value" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Roman (generated)" id="1676194662474-91">
+        <createTable tableName="book2author">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="book2author_pkey"/>
+            </column>
+            <column name="author_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="sort_index" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-92">
+        <createTable tableName="book2genre">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="book2genre_pkey"/>
+            </column>
+            <column name="book_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="genre_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-93">
+        <createTable tableName="book2user">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="book2user_pkey"/>
+            </column>
+            <column name="book_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-94">
+        <createTable tableName="book2user_type">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="book2user_type_pkey"/>
+            </column>
+            <column name="code" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-95">
+        <createTable tableName="book_file">
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hash" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="path" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-96">
+        <createTable tableName="book_file_type">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="book_file_type_pkey"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-97">
+        <createTable tableName="book_review">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="book_review_pkey"/>
+            </column>
+            <column name="book_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-98">
+        <createTable tableName="book_review_like">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="book_review_like_pkey"/>
+            </column>
+            <column name="review_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-99">
+        <createTable tableName="document">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="document_pkey"/>
+            </column>
+            <column name="slug" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="sort_index" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-100">
+        <createTable tableName="faq">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="faq_pkey"/>
+            </column>
+            <column name="answer" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="question" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="sort_index" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-101">
+        <createTable tableName="file_download">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="file_download_pkey"/>
+            </column>
+            <column name="book_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="count" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-102">
+        <createTable tableName="genre">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="genre_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent_id" type="INT"/>
+            <column name="slug" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-103">
+        <createTable tableName="message">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="message_pkey"/>
+            </column>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="subject" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-104">
+        <createTable tableName="user_contact">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="user_contact_pkey"/>
+            </column>
+            <column name="approved" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code_time" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="code_trails" type="INT"/>
+            <column name="contact" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="INT"/>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-105">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="users_pkey"/>
+            </column>
+            <column name="balance" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hash" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reg_time" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-106">
+        <addPrimaryKey columnNames="id" constraintName="book_file_pkey" tableName="book_file"/>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1676194662474-107">
+        <addForeignKeyConstraint baseColumnNames="type_id" baseTableName="book_file" constraintName="fkab7ynoex2ahy28trbmkk9uxu4" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="book_file_type"/>
+    </changeSet>
+</databaseChangeLog>

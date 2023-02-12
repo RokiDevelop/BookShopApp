@@ -2,6 +2,7 @@ package com.example.bookshopapp.services;
 
 import com.example.bookshopapp.data.Author;
 import com.example.bookshopapp.data.Book;
+import com.example.bookshopapp.repositories.Book2AuthorRepository;
 import com.example.bookshopapp.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,12 @@ import java.util.*;
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final Book2AuthorRepository book2AuthorRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository, Book2AuthorRepository book2AuthorRepository) {
         this.bookRepository = bookRepository;
+        this.book2AuthorRepository = book2AuthorRepository;
     }
 
     public List<Book> getBooksData() {
@@ -33,7 +36,7 @@ public class BookService {
     }
 
     public List<Book> getBooksByAuthor(Author author) {
-        Set<Integer>  booksId = bookRepository.findBooksByAuthorId(author.getId());
+        List<Integer> booksId = book2AuthorRepository.getAllByAuthorId(author.getId());
         List<Book> books = bookRepository.findBooksByIdList(booksId);
         return books;
     }

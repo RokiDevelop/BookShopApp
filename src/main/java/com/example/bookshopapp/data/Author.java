@@ -1,13 +1,11 @@
 package com.example.bookshopapp.data;
 
-import com.example.bookshopapp.data.book.links.Book2AuthorEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "author")
@@ -32,4 +30,12 @@ public class Author {
 
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", name='" + name +
+                '}';
+    }
 }

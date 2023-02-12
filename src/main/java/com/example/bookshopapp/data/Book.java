@@ -53,15 +53,7 @@ public class Book {
     public String toString() {
         return "Book{" +
                 "id=" + id +
-                ", pubDate=" + pubDate +
-                ", isBestseller=" + isBestseller +
-                ", slug='" + slug + '\'' +
                 ", title='" + title + '\'' +
-                ", image='" + image + '\'' +
-                ", description='" + description + '\'' +
-                ", discount='" + discount + '\'' +
-                ", price='" + price + '\'' +
-                ", book2AuthorSet=" + book2AuthorSet +
                 '}';
     }
 }
