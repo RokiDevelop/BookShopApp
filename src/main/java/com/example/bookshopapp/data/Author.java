@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "authors")
+@Table(name = "author")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -19,23 +19,23 @@ public class Author {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @JoinColumn(name = "first_name")
-    private String firstName;
+    @Column(name = "photo", columnDefinition = "VARCHAR(255)")
+    private String photo;
 
-    @JoinColumn(name = "last_name")
-    private String lastName;
+    @Column(name = "slug", columnDefinition = "VARCHAR(255)", nullable = false)
+    private String slug;
+
+    @Column(name = "name", columnDefinition = "VARCHAR(255)", nullable = false)
+    private String name;
+
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
 
     @Override
     public String toString() {
         return "Author{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", name='" + name +
                 '}';
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
     }
 }

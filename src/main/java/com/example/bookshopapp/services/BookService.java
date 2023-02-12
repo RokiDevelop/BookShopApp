@@ -2,9 +2,9 @@ package com.example.bookshopapp.services;
 
 import com.example.bookshopapp.data.Author;
 import com.example.bookshopapp.data.Book;
+import com.example.bookshopapp.repositories.Book2AuthorRepository;
 import com.example.bookshopapp.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -13,38 +13,31 @@ import java.util.*;
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final Book2AuthorRepository book2AuthorRepository;
 
     @Autowired
-    public List<Book> getBooksData() {
-        Iterator<Book> iterator = bookRepository.findAll().iterator();
-        List<Book> books = new ArrayList<>();
-        iterator.forEachRemaining(books::add);
-        return books;
-    }
-
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository, Book2AuthorRepository book2AuthorRepository) {
         this.bookRepository = bookRepository;
+        this.book2AuthorRepository = book2AuthorRepository;
     }
 
-    public Book getBookById(int id) throws Exception {
-        Optional<Book> optionalBook = bookRepository.findById(id);
-        if (optionalBook.isPresent()) {
-            return optionalBook.get();
-        }
-        throw new Exception();
+    public List<Book> getBooksData() {
+        return bookRepository.findAll();
+    }
+
+    public Book getBookById(int id) {
+        return bookRepository.getReferenceById(id);
     }
 
     public List<Book> getRandomBooksData() {
         List<Book> list = getBooksData();
         Collections.shuffle(list);
-        return new ArrayList<>(list);
+        return list;
     }
 
     public List<Book> getBooksByAuthor(Author author) {
-        Iterator<Book> iterator = bookRepository.findByAuthorId(author.getId()).iterator();
-        //TODO: create select booksByAuthor
-        List<Book> books = new ArrayList<>();
-        iterator.forEachRemaining(books::add);
+        List<Integer> booksId = book2AuthorRepository.getAllByAuthorId(author.getId());
+        List<Book> books = bookRepository.findBooksByIdList(booksId);
         return books;
     }
 
