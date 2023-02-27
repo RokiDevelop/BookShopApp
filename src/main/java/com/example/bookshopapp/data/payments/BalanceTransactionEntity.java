@@ -1,5 +1,6 @@
 package com.example.bookshopapp.data.payments;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @Table(name = "balance_transaction")
 @Getter
 @Setter
+@ApiModel(description = "data model of balance transaction entity", value = "BalanceTransaction")
 public class BalanceTransactionEntity {
 
     @Id
@@ -19,7 +21,7 @@ public class BalanceTransactionEntity {
     @Column(columnDefinition = "INT NOT NULL")
     private int userId;
 
-    @Column(columnDefinition = "TIMESTAMP NOT NULL")
+    @Column(columnDefinition = "TIMESTAMP(6) NOT NULL")
     private LocalDateTime time;
 
     @Column(columnDefinition = "INT NOT NULL  DEFAULT 0")

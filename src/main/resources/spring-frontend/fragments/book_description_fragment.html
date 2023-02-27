@@ -5,7 +5,7 @@
         <h1 class="ProductCard-title" th:text="${book.title}">Мара и морок
         </h1>
         <div class="ProductCard-author"><span class="ProductCard-titleProp" th:text="#{item.product-card-title-authors}">Автор:</span>&#32;<a
-                href="#" th:text="${book.author}">Лиия Арден</a>
+                href="#" >Лиия Арден</a> <!--th:text="${book.author}"-->
         </div>
         <div class="ProductCard-rating"><span class="ProductCard-titleProp" th:text="#{item.product-card-title-rating}">Рейтинг:</span>
             <button class="trigger trigger_dropdown" type="button">
@@ -325,7 +325,7 @@
                 href="/tags/">Современные</a>,&#32;<a href="/tags/">Психологическая проза</a>
         </div>
         <div class="ProductCard-cost"><span class="ProductCard-titleProp" th:text="#{item.product-card-title-price}">Цена:</span>
-            <span class="ProductCard-priceOld" th:if="${book.priceOld != null}" th:text="${book.priceOld}">₽300</span>
+            <span class="ProductCard-priceOld" th:if="${book.discount != null}" th:text="${book.discount}">₽300</span>
             <span class="ProductCard-price" th:text="${book.price}">₽180</span>
         </div>
     </div>

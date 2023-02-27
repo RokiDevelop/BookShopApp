@@ -1,5 +1,6 @@
 package com.example.bookshopapp.data.book.file;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "book_file")
 @Getter
 @Setter
+@ApiModel(description = "data model of book file entity", value = "BookFile")
 public class BookFile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

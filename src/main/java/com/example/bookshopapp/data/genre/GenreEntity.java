@@ -1,5 +1,6 @@
 package com.example.bookshopapp.data.genre;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "genre")
 @Getter
 @Setter
+@ApiModel(description = "data model of genre entity", value = "Genre")
 public class GenreEntity {
 
     @Id

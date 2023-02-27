@@ -3,6 +3,8 @@ package com.example.bookshopapp.controllers;
 import com.example.bookshopapp.data.Author;
 import com.example.bookshopapp.services.AuthorService;
 import com.example.bookshopapp.services.BookService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@Api(description = "authors data")
 @RequestMapping("/authors")
 public class AuthorsPageController {
 
@@ -31,7 +34,7 @@ public class AuthorsPageController {
     }
 
     @GetMapping("")
-    public String authors() {
+    public String authorsPage() {
         return "authors/index";
     }
 
@@ -41,5 +44,12 @@ public class AuthorsPageController {
         model.addAttribute("author", author);
         model.addAttribute("books", bookService.getBooksByAuthor(author));
         return "authors/slug";
+    }
+
+    @GetMapping("/api")
+    @ApiOperation("method to get map of authors")
+    @ResponseBody
+    public Map<String, List<Author>> authorsApi() {
+        return authorService.getAuthorMapByLetter();
     }
 }

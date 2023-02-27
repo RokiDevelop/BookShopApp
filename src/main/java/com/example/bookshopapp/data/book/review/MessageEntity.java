@@ -1,5 +1,6 @@
 package com.example.bookshopapp.data.book.review;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,13 +11,14 @@ import java.time.LocalDateTime;
 @Table(name = "message")
 @Getter
 @Setter
+@ApiModel(description = "data model of message entity", value ="Message")
 public class MessageEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(columnDefinition = "TIMESTAMP NOT NULL")
+    @Column(columnDefinition = "TIMESTAMP(6) NOT NULL")
     private LocalDateTime time;
 
     @Column(columnDefinition = "INT")

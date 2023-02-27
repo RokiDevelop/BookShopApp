@@ -1,5 +1,6 @@
 package com.example.bookshopapp.data.user;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @Table(name = "users")
 @Getter
 @Setter
+@ApiModel(description = "data model of user entity", value = "User")
 public class UserEntity {
 
     @Id
@@ -19,7 +21,7 @@ public class UserEntity {
     @Column(columnDefinition = "VARCHAR(255) NOT NULL")
     private String hash;
 
-    @Column(columnDefinition = "TIMESTAMP NOT NULL")
+    @Column(columnDefinition = "TIMESTAMP(6) NOT NULL")
     private LocalDateTime regTime;
 
     @Column(columnDefinition = "INT NOT NULL")

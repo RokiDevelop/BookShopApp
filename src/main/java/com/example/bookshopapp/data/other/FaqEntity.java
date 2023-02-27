@@ -1,5 +1,6 @@
 package com.example.bookshopapp.data.other;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "faq")
 @Getter
 @Setter
+@ApiModel(description = "data model of faq entity", value = "Faq")
 public class FaqEntity {
 
     @Id

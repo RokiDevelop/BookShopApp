@@ -4,18 +4,17 @@ import com.example.bookshopapp.data.Author;
 import com.example.bookshopapp.data.Book;
 import com.example.bookshopapp.services.AuthorService;
 import com.example.bookshopapp.services.BookService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @Controller
 @RequestMapping("/books")
+@Api(description = "books data")
 public class BooksPageController {
 
     private final BookService bookService;
@@ -76,5 +75,12 @@ public class BooksPageController {
     public String tagById(@PathVariable(value = "id") int id, Model model) {
         //TODO: set return string
         return null;
+    }
+
+    @GetMapping("/api")
+    @ApiOperation(value = "method to get list of books")
+    @ResponseBody
+    public List<Book> booksApi(){
+        return bookService.getBooksData();
     }
 }

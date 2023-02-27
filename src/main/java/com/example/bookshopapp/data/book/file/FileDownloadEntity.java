@@ -1,5 +1,6 @@
 package com.example.bookshopapp.data.book.file;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "file_download")
 @Getter
 @Setter
+@ApiModel(description = "data model of file download entity", value = "FileDownload")
 public class FileDownloadEntity {
 
     @Id

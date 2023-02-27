@@ -1,5 +1,6 @@
 package com.example.bookshopapp.data.book.links;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "book2author")
 @Getter
 @Setter
+@ApiModel(description = "data model of book to author entity", value = "Book2Author")
 public class Book2AuthorEntity {
 
     @Id

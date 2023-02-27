@@ -2,6 +2,8 @@ package com.example.bookshopapp.controllers;
 
 import com.example.bookshopapp.data.Book;
 import com.example.bookshopapp.services.BookService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@Api
 public class MainPageController {
 
     private final BookService bookService;
@@ -131,5 +134,10 @@ public class MainPageController {
         return null;
     }
 
+    @GetMapping("/main/api")
+    @ApiOperation("")
+    public String mainApi(){
+        return "";
+    }
 
 }
