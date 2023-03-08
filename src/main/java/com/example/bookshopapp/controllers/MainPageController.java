@@ -22,18 +22,18 @@ public class MainPageController {
     }
 
     @ModelAttribute(value = "bookDataRecommendation")
-    public List<Book> getBookDataRecommendation() {
-        return bookService.getRandomBooksData();
+    public List<Book> getBookDataPageRecommendation() {
+        return bookService.getPageOfRecommendedBooks(0, 6).getContent();
     }
 
-    @ModelAttribute(value = "bookDataPopular")
+    @ModelAttribute(value = "bookDataPagePopular")
     public List<Book> getBookDataPopular() {
-        return bookService.getBooksData();
+        return bookService.getPageOfPopularBooks(0, 6).getContent();
     }
 
     @ModelAttribute(value = "bookDataRecent")
-    public List<Book> getBookDataRecent() {
-        return bookService.getRandomBooksData();
+    public List<Book> getBookDataPageRecent() {
+        return bookService.getPageOfRecentBooks(0, 6).getContent();
     }
 
     @GetMapping("")
@@ -139,5 +139,4 @@ public class MainPageController {
     public String mainApi(){
         return "";
     }
-
 }

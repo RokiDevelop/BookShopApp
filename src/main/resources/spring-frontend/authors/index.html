@@ -29,14 +29,14 @@
             <div class="Section">
                 <div class="Authors" th:object="${authorsMap}">
                     <div class="Authors-links" >
-                        <a class="Authors-link" th:each="keys : ${authorsMap.keySet()}" href="#a" th:href="${'#' + #strings.toLowerCase(keys)}" th:text="${#strings.toUpperCase(keys)}">А
+                        <a class="Authors-link" th:each="key : ${authorsMap.keySet()}" href="#a" th:href="${'#' + #strings.toLowerCase(key)}" th:text="${#strings.toUpperCase(key)}">А
                         </a>
                     </div>
                     <div class="Authors-block" th:each="authors : ${authorsMap}">
                         <h2 class="Authors-title" id="a" th:id="${#strings.toLowerCase(authors.getKey())}"  th:text="${#strings.toUpperCase(authors.getKey())}">А
                         </h2>
                         <div class="Authors-letter">
-                            <div class="Authors-item" th:each="author : ${authors.getValue()}"><a href="/authors/slug.html"  th:href="${author.id}" th:text="${author.lastName + ' ' + author.firstName}">Абгарян Наринэ</a>
+                            <div class="Authors-item" th:each="author : ${authors.getValue()}"><a href="/authors/slug.html"  th:href="${author.id}" th:text="${author.name}">Абгарян Наринэ</a>
                             </div>
                         </div>
                     </div>

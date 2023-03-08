@@ -1,7 +1,6 @@
 package com.example.bookshopapp.data;
 
 import com.example.bookshopapp.data.book.links.Book2AuthorEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -11,7 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "book")
@@ -51,9 +50,8 @@ public class Book {
     @Column(name = "discount", columnDefinition = "SMALLINT default 0", nullable = false)
     private byte discount;
 
-    @OneToMany(mappedBy = "bookId")
-    @JsonIgnore
-    private Set<Book2AuthorEntity> book2AuthorSet;
+    @ManyToMany(mappedBy = "bookId")
+    private List<Book2AuthorEntity> book2AuthorSet;
 
     @Override
     public String toString() {

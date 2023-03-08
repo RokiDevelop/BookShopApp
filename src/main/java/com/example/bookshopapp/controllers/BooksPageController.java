@@ -2,6 +2,9 @@ package com.example.bookshopapp.controllers;
 
 import com.example.bookshopapp.data.Author;
 import com.example.bookshopapp.data.Book;
+import com.example.bookshopapp.data.dto.IBooksDto;
+import com.example.bookshopapp.data.dto.PopularBooksDto;
+import com.example.bookshopapp.data.dto.RecommendedBookDto;
 import com.example.bookshopapp.services.AuthorService;
 import com.example.bookshopapp.services.BookService;
 import io.swagger.annotations.Api;
@@ -25,31 +28,38 @@ public class BooksPageController {
         this.authorService = authorService;
     }
 
-    @GetMapping("/recent")
-    public String recentPage(Model model) {
-        model.addAttribute("category", "Новинки");
-        model.addAttribute("booksList", bookService.getRecentBooks());
-        return "books/recent";
+    @ModelAttribute(value = "bookDataRecent")
+    public List<Book> getBookDataPageRecent() {
+        return bookService.getPageOfRecentBooks(0, 6).getContent();
     }
 
-    @GetMapping("/popular" )
-    public String popularPage(Model model) {
-        model.addAttribute("booksList", bookService.getPopularBooks());
-        return "books/popular";
+    @GetMapping("/recent")
+    @ResponseBody
+    public IBooksDto recentPage(@RequestParam("from") String strFrom,
+                                @RequestParam("to") String strTo,
+                                @RequestParam("offset") Integer offset,
+                                @RequestParam("limit") Integer limit) {
+        return new PopularBooksDto(bookService.getPageOfRecentBooks(offset, limit).getContent());
+    }
+
+    @GetMapping("/popular")
+    @ResponseBody
+    public IBooksDto popularPage(@RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit) {
+        return new PopularBooksDto(bookService.getPageOfPopularBooks(offset, limit).getContent());
     }
 
     @GetMapping("/recommended")
-    public String recommendedBook(Model model) {
-        model.addAttribute("booksList", bookService.getRecommendedBooks());
-        //TODO: set return string
-        return null;
+    @ResponseBody
+    public IBooksDto recommendedBook(@RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit) {
+        return new RecommendedBookDto(bookService.getPageOfRecommendedBooks(offset, limit).getContent());
     }
 
     @GetMapping("/author/{id}")
-    public String booksByAuthor(@PathVariable(value = "id") int id, Model model) throws Exception {
+    public String booksByAuthor(@PathVariable(value = "id") int id, Model model) {
         Author author = authorService.getAuthorById(id);
+
         model.addAttribute("author", author);
-        model.addAttribute("booksListByAuthor", bookService.getBooksByAuthor(author));
+        model.addAttribute("books", bookService.getPageBooksByAuthor(author, 0, 20).getContent());
         return "books/author";
     }
 
@@ -61,8 +71,11 @@ public class BooksPageController {
 
     @GetMapping("/{id}")
     public String book(@PathVariable(value = "id") int id, Model model) throws Exception {
-        //TODO: set return string
-        model.addAttribute("book", bookService.getBookById(id));
+        Book book = bookService.getBookById(id);
+        List<Author> authors = authorService.findAuthorsByBookId(book.getId());
+
+        model.addAttribute("book", book);
+        model.addAttribute("authors", authors);
         return "books/slug";
     }
 
@@ -80,7 +93,7 @@ public class BooksPageController {
     @GetMapping("/api")
     @ApiOperation(value = "method to get list of books")
     @ResponseBody
-    public List<Book> booksApi(){
+    public List<Book> booksApi() {
         return bookService.getBooksData();
     }
 }

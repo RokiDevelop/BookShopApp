@@ -2,23 +2,28 @@ package com.example.bookshopapp.services;
 
 import com.example.bookshopapp.data.Author;
 import com.example.bookshopapp.data.Book;
-import com.example.bookshopapp.repositories.Book2AuthorRepository;
+import com.example.bookshopapp.data.dto.*;
+import com.example.bookshopapp.repositories.AuthorRepository;
 import com.example.bookshopapp.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
 public class BookService {
 
     private final BookRepository bookRepository;
-    private final Book2AuthorRepository book2AuthorRepository;
+    private final AuthorRepository authorRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository, Book2AuthorRepository book2AuthorRepository) {
+    public BookService(BookRepository bookRepository, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
-        this.book2AuthorRepository = book2AuthorRepository;
+        this.authorRepository = authorRepository;
     }
 
     public List<Book> getBooksData() {
@@ -29,37 +34,31 @@ public class BookService {
         return bookRepository.getReferenceById(id);
     }
 
-    public List<Book> getRandomBooksData() {
-        List<Book> list = getBooksData();
-        Collections.shuffle(list);
-        return list;
+    public Page<Book> getPageBooksByAuthor(Author author, Integer offset, Integer limit) {
+        Pageable nextPage = PageRequest.of(offset, limit);
+        return bookRepository.findBooksByAuthorId(author.getId(), nextPage);
     }
 
-    public List<Book> getBooksByAuthor(Author author) {
-        List<Integer> booksId = book2AuthorRepository.getAllByAuthorId(author.getId());
-        List<Book> books = bookRepository.findBooksByIdList(booksId);
-        return books;
+    public Page<Book> getPageOfRecommendedBooks(Integer offset, Integer limit){
+        Pageable nextPage = PageRequest.of(offset,limit);
+        return bookRepository.findAll(nextPage);
+//                bookRepository.findBooksRecommended(nextPage).getContent() //TODO:need to make query
     }
 
-    public List<Book> getRecommendedBooks() {
-        //TODO: edit result list by recommendation;
-        List<Book> books;
-        books = getBooksData();
-        return books;
+    public Page<Book> getPageOfPopularBooks(Integer offset, Integer limit) {
+        Pageable nextPage = PageRequest.of(offset,limit);
+        return bookRepository.findAll(nextPage);
+//                bookRepository.findBooksPopular(nextPage).getContent() //TODO:need to make query
     }
 
-
-    public List<Book> getPopularBooks() {
-        //TODO: edit result list by popular;
-        List<Book> books;
-        books = getBooksData();
-        return books;
+    public Page<Book> getPageOfRecentBooks(Integer offset, Integer limit) {
+        Pageable nextPage = PageRequest.of(offset,limit);
+        return bookRepository.findAll(nextPage);
+//                bookRepository.findBooksRecent(nextPage).getContent() //TODO:need to make query
     }
 
-    public List<Book> getRecentBooks() {
-        //TODO: edit result list by recent;
-        List<Book> books;
-        books = getBooksData();
-        return books;
+    public Page<Book> getPageOfSearchResultBooks(LocalDateTime minDate, LocalDateTime maxDate, Integer offset, Integer limit) {
+        Pageable nextPage = PageRequest.of(offset,limit);
+        return bookRepository.findBooksByPubDateBetween(minDate, maxDate, nextPage);
     }
 }

@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div class="Cards Cards_refresh" th:fragment="pool (category, booksList)">
-    <div class="Card" th:each="book : ${booksList}">
-        <div class="Card-picture"><a href="#" th:href="${book.id}"><img src="/assets/img/content/main/card.jpg" alt="card.jpg"/></a>
+<div class="Cards Cards_refresh" th:fragment="pool(category, booksList)">
+    <!--/*@thymesVar id="book" type="com.example.bookshopapp.data.Book"*/-->
+    <!--/*@thymesVar id="author" type="com.example.bookshopapp.data.Author"*/-->
+    <div class="Card" th:each="book : ${books}">
+        <div class="Card-picture"><a href="#" th:href="@{'/books/'+${book.id}}"><img src="/assets/img/content/main/card.jpg" alt="card.jpg"/></a>
+
             <div class="Card-sale" th:if="${book.discount != null}" th:text="#{item.card-sale}">Скидка
             </div>
             <div class="Card-ribbon"><span class="Card-ribbonText" th:if="${true}" th:text="#{item.card-ribbon}">Бестселлер</span>
@@ -12,7 +15,7 @@
         <div class="Card-content">
             <strong class="Card-title"><a href="#" th:href="${book.id}" th:text="${book.title}">Великая Отечественная война. 1941-1945</a>
             </strong>
-            <div class="Card-description" >Солопенко Алла, Меркулов Дмитрий <!--th:text="${book.author}"-->
+            <div class="Card-description">Солопенко Алла, Меркулов Дмитрий <!--th:text="${book.author}"-->
             </div>
             <div class="Card-cost">
                 <span class="Card-priceOld" th:if="${book.discount != null}" th:text="${book.discount}">₽50.00</span>

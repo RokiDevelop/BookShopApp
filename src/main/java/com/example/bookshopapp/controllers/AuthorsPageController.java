@@ -1,6 +1,8 @@
 package com.example.bookshopapp.controllers;
 
 import com.example.bookshopapp.data.Author;
+import com.example.bookshopapp.data.dto.AuthorsBooks;
+import com.example.bookshopapp.data.dto.IBooksDto;
 import com.example.bookshopapp.services.AuthorService;
 import com.example.bookshopapp.services.BookService;
 import io.swagger.annotations.Api;
@@ -33,16 +35,23 @@ public class AuthorsPageController {
         return resultMap;
     }
 
+    @GetMapping("/author/{id}")
+    @ResponseBody
+    public IBooksDto authorById(@PathVariable(value = "id") int id,@RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit) {
+        Author author = authorService.getAuthorById(id);
+        return new AuthorsBooks( bookService.getPageBooksByAuthor(author, offset, limit).getContent());
+    }
+
     @GetMapping("")
     public String authorsPage() {
         return "authors/index";
     }
 
     @GetMapping(value = "/{id}")
-    public String authorById(@PathVariable(value = "id") int id, Model model) throws Exception {
+    public String authors(@PathVariable(value = "id") int id, Model model) {
         Author author = authorService.getAuthorById(id);
         model.addAttribute("author", author);
-        model.addAttribute("books", bookService.getBooksByAuthor(author));
+        model.addAttribute("books", bookService.getPageBooksByAuthor(author,0, 6).getContent());
         return "authors/slug";
     }
 

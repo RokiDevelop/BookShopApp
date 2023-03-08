@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="article">
-    <h1 class="Middle-title" th:text="${author}">Борис Васильевич Бедный
+    <!--/*@thymesVar id="author" type="com.example.bookshopapp.data.Author"*/-->
+    <h1 class="Middle-title" th:text="${author.name}">Борис Васильевич Бедный
     </h1>
     <article class="Article">
         <div class="sdf">
@@ -13,13 +14,10 @@
                 <div>
                     <h2 th:text="#{middle-title.biografiya-middle-title}">Биография
                     </h2>
-                    <p>Борис Бедный родился в семье учителя в 1916 году в станице Ярославская Краснодарского
+                    <p th:text="${author.description}">Борис Бедный родился в семье учителя в 1916 году в станице Ярославская Краснодарского
                         края. Окончил Майкопский лесной техникум и был послан учиться в Ленинградскую
                         лесотехническую академию. Стал специалистом по сплаву леса и приехал в Республику Коми,
                         работать на сплавных предприятиях.
-                    </p>
-                    <p>В октябре 1941 года Борис пошёл на фронт, а в августе 1942 года попал в плен, и находился
-                        там до апреля 1945 года.
                     </p>
                 </div>
             </div>

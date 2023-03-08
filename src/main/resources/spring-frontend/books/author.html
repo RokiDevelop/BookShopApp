@@ -24,8 +24,8 @@
     <div class="wrap">
         <main class="Middle-main">
             <ul class="breadcrumbs"
-                th:replace="~{fragments/breadcrumb_fragment :: breadcrumps(category=${author.firstName + ' ' + author.lastName})}"></ul>
-            <h1 class="Middle-title" th:text="${author.firstName + ' ' + author.lastName}">Борис Васильевич Бедный
+                th:replace="~{fragments/breadcrumb_fragment :: breadcrumps(category=${author.name}, booksList=${booksList})}"></ul>
+            <h1 class="Middle-title" th:text="${author.name}">Борис Васильевич Бедный
             </h1>
             <div class="Section">
                 <div class="Cards Cards_refresh"
