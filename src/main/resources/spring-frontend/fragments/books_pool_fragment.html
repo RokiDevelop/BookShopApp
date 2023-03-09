@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div class="Cards Cards_refresh" th:fragment="pool(category, booksList)">
+<div class="Cards Cards_refresh" th:fragment="pool(category, booksData)">
     <!--/*@thymesVar id="book" type="com.example.bookshopapp.data.Book"*/-->
     <!--/*@thymesVar id="author" type="com.example.bookshopapp.data.Author"*/-->
-    <div class="Card" th:each="book : ${books}">
+    <div class="Card" th:each="book : ${booksData}">
         <div class="Card-picture"><a href="#" th:href="@{'/books/'+${book.id}}"><img src="/assets/img/content/main/card.jpg" alt="card.jpg"/></a>
 
             <div class="Card-sale" th:if="${book.discount != null}" th:text="#{item.card-sale}">Скидка

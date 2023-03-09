@@ -9,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -32,7 +31,8 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
 //    List<Book> findBooksByPubDateBetween(LocalDateTime minDate, LocalDateTime maxDate);
 
-    Page<Book> findBooksByPubDateBetween(LocalDateTime minDate, LocalDateTime maxDate, Pageable nextPage);
+    @Query(value = "SELECT b FROM Book b WHERE b.pubDate between :min_date AND :max_date ORDER BY b.pubDate")
+    Page<Book> findBooksByPubDateBetween(@Param("min_date")LocalDateTime minDate, @Param("max_date") LocalDateTime maxDate, Pageable nextPage);
 
     List<Book> findBooksByDiscountBetween(Byte min, Byte max);
 

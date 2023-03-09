@@ -9,11 +9,11 @@ import com.example.bookshopapp.services.AuthorService;
 import com.example.bookshopapp.services.BookService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/books")
@@ -28,38 +28,40 @@ public class BooksPageController {
         this.authorService = authorService;
     }
 
-    @ModelAttribute(value = "bookDataRecent")
-    public List<Book> getBookDataPageRecent() {
-        return bookService.getPageOfRecentBooks(0, 6).getContent();
-    }
-
     @GetMapping("/recent")
-    @ResponseBody
-    public IBooksDto recentPage(@RequestParam("from") String strFrom,
-                                @RequestParam("to") String strTo,
-                                @RequestParam("offset") Integer offset,
-                                @RequestParam("limit") Integer limit) {
-        return new PopularBooksDto(bookService.getPageOfRecentBooks(offset, limit).getContent());
+    public String recentPage(@RequestParam("from") Optional<String> optDateFrom,
+                                @RequestParam("to") Optional<String> optDateTo,
+                                @RequestParam("offset") Optional<Integer> offset,
+                                @RequestParam("limit") Optional<Integer> limit,
+                             Model model) {
+        Page<Book> bookPage = bookService.getPageOfRecentBooks(
+                optDateFrom, optDateTo,
+                offset, limit);
+
+        model.addAttribute("bookDataRecent", bookPage.getContent());
+
+        return "books/recent";
     }
 
     @GetMapping("/popular")
     @ResponseBody
-    public IBooksDto popularPage(@RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit) {
-        return new PopularBooksDto(bookService.getPageOfPopularBooks(offset, limit).getContent());
+    public IBooksDto popularPage(@RequestParam("offset")  Optional<Integer> offset, @RequestParam("limit") Optional<Integer> limit) {
+        return new PopularBooksDto(bookService.getPageOfPopularBooks(offset.orElse(0), limit.orElse(6)).getContent());
     }
 
     @GetMapping("/recommended")
     @ResponseBody
-    public IBooksDto recommendedBook(@RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit) {
-        return new RecommendedBookDto(bookService.getPageOfRecommendedBooks(offset, limit).getContent());
+    public IBooksDto recommendedBook(@RequestParam("offset") Optional<Integer> offset, @RequestParam("limit") Optional<Integer> limit) {
+        return new RecommendedBookDto(bookService.getPageOfRecommendedBooks(offset.orElse(0), limit.orElse(6)).getContent());
     }
 
     @GetMapping("/author/{id}")
-    public String booksByAuthor(@PathVariable(value = "id") int id, Model model) {
+    public String booksByAuthor(@PathVariable(value = "id") int id, Model model, @RequestParam("offset") Optional<Integer> offset,
+                                @RequestParam("limit") Optional<Integer> limit) {
         Author author = authorService.getAuthorById(id);
 
         model.addAttribute("author", author);
-        model.addAttribute("books", bookService.getPageBooksByAuthor(author, 0, 20).getContent());
+        model.addAttribute("books", bookService.getPageBooksByAuthor(author, offset.orElse(0), limit.orElse(20)).getContent());
         return "books/author";
     }
 

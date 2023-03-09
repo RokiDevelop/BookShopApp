@@ -25,7 +25,7 @@
     <div class="wrap">
         <main class="Middle-main">
             <ul class="breadcrumbs"
-                th:replace="~{fragments/breadcrumb_fragment :: breadcrumps(category=#{fragment-params.book-recent-category-name}, booksList=${bookDataRecent})}"></ul>
+                th:replace="~{fragments/breadcrumb_fragment :: breadcrumps(category=#{fragment-params.book-recent-category-name})}"></ul>
             <div class="Section">
                 <div class="Section-header">
                     <h1 class="Section-title" th:text="#{fragment-params.book-recent-category-name}">Новинки
@@ -50,7 +50,7 @@
                     </form>
                 </div>
                 <div class="Cards Cards_refresh"
-                     th:replace="~{fragments/books_pool_fragment :: pool(category='recent', booksList = ${booksList})}"></div>
+                     th:replace="~{fragments/books_pool_fragment :: pool(category='recent', booksData = ${bookDataRecent})}"></div>
             </div>
         </main>
     </div>

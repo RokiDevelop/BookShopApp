@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Api
@@ -33,7 +34,7 @@ public class MainPageController {
 
     @ModelAttribute(value = "bookDataRecent")
     public List<Book> getBookDataPageRecent() {
-        return bookService.getPageOfRecentBooks(0, 6).getContent();
+        return bookService.getPageOfRecentBooks(Optional.empty(),Optional.empty(),Optional.of(0), Optional.of(20)).getContent();
     }
 
     @GetMapping("")
