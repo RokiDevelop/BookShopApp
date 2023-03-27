@@ -1,4 +1,4 @@
 package com.example.bookshopapp.data.dto;
 
-public abstract class IBooksDto {
+public abstract class AbstractBooksDto {
 }

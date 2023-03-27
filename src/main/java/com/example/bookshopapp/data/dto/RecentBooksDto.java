@@ -10,7 +10,7 @@ import java.util.List;
 @ToString
 @Getter
 @Setter
-public class RecentBooksDto extends IBooksDto{
+public class RecentBooksDto extends AbstractBooksDto {
 
     private int count;
     private List<Book> books;

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="Tags" th:fragment="genreDataSection (genreData)">
+    <div class="Tags-title">
+        <div class="Tag">
+            <!--/*@thymesVar id="genreData" type="com.example.bookshopapp.data.genre.genreTree.GenreNode"*/-->
+            <a href="/genres/slug.html"
+               th:text="${genreData.genre.name} + ' (' + ${genreData.amountBook} + ')'"
+               th:href="@{'/books/genre/' + ${genreData.genre.id}}" style="font-size: 10px"
+               th:style="'font-size:' + ${genreData.amountBook*3 > 40 ? 40 : (genreData.amountBook*3 < 15 ? 15 : genreData.amountBook*3)} +'px'" >Деловая литература
+            </a>
+        </div>
+    </div>
+    <!--/*@thymesVar id="genreData" type="com.example.bookshopapp.data.genre.genreTree.GenreNode"*/-->
+    <div class="Tag" th:if="${genreData.children} != null" th:each="genre : ${genreData.children}">
+        <div th:replace="~{fragments/genre_string_fragment :: genreDataSection(${genre})}">
+        </div>
+    </div>
+</div>
+</html>

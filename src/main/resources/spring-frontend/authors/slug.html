@@ -25,10 +25,10 @@
     <div class="wrap">
         <main class="Middle-main">
             <ul class="breadcrumbs"
-                th:replace="~{fragments/breadcrumb_fragment :: breadcrumps(category=${author.name}, booksList=${booksList})}"></ul>
+                th:replace="~{fragments/breadcrumb_fragment :: breadcrumps(category=${author.name})}"></ul>
             <div th:replace="~{fragments/author_article_fragment :: article(author = ${author})}"></div>
             <div class="Section"
-                 th:replace="~{fragments/book_slider_fragment :: bookSlider(title=${author.id}, booksData =${books})}"></div>
+                 th:replace="~{fragments/book_slider_fragment :: bookSlider(title=${author.name}, booksData = ${booksData})}"></div>
             <footer class="Section-footer"><a class="Author-books" th:href="@{'/books/author/'+${author.id}}" href="/books/author.html" th:text="#{author-slug-all-books-text-button}">Все
                 книги автора<span
                         class="Author-amount">(55)</span></a>

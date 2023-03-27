@@ -10,11 +10,12 @@ import java.util.List;
 @ToString
 @Getter
 @Setter
-public class PopularBooksDto extends AbstractBooksDto {
+public class BooksByGenreDto extends AbstractBooksDto{
+
     private int count;
     private List<Book> books;
 
-    public PopularBooksDto(List<Book> books) {
+    public BooksByGenreDto(List<Book> books) {
         this.books = books;
         this.count = books.size();
     }

@@ -1,8 +1,8 @@
 package com.example.bookshopapp.controllers;
 
 import com.example.bookshopapp.data.Author;
-import com.example.bookshopapp.data.dto.AuthorsBooks;
-import com.example.bookshopapp.data.dto.IBooksDto;
+import com.example.bookshopapp.data.dto.BookDto;
+import com.example.bookshopapp.data.dto.AbstractBooksDto;
 import com.example.bookshopapp.services.AuthorService;
 import com.example.bookshopapp.services.BookService;
 import io.swagger.annotations.Api;
@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@Api(description = "authors data")
 @RequestMapping("/authors")
+@Api(description = "authors data")
 public class AuthorsPageController {
 
     private final AuthorService authorService;
@@ -31,15 +31,7 @@ public class AuthorsPageController {
 
     @ModelAttribute(value = "authorsMap")
     public Map<String, List<Author>> authorsMap() {
-        Map<String, List<Author>> resultMap = authorService.getAuthorMapByLetter();
-        return resultMap;
-    }
-
-    @GetMapping("/author/{id}")
-    @ResponseBody
-    public IBooksDto authorById(@PathVariable(value = "id") int id,@RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit) {
-        Author author = authorService.getAuthorById(id);
-        return new AuthorsBooks( bookService.getPageBooksByAuthor(author, offset, limit).getContent());
+        return authorService.getAuthorMapByLetter();
     }
 
     @GetMapping("")
@@ -48,10 +40,16 @@ public class AuthorsPageController {
     }
 
     @GetMapping(value = "/{id}")
-    public String authors(@PathVariable(value = "id") int id, Model model) {
-        Author author = authorService.getAuthorById(id);
+    public String authors(@PathVariable(value = "id") Integer authorId,
+                                    @RequestParam(value = "offset", required = false) Integer offset,
+                                    @RequestParam(value = "limit", required = false) Integer limit,
+                                    Model model) {
+        Author author = authorService.getAuthorById(authorId);
+        AbstractBooksDto booksDto =  new BookDto( bookService.getPageBooksByAuthor(authorId, offset, limit).getContent());
+
         model.addAttribute("author", author);
-        model.addAttribute("books", bookService.getPageBooksByAuthor(author,0, 6).getContent());
+        model.addAttribute("booksData", booksDto);
+
         return "authors/slug";
     }
 

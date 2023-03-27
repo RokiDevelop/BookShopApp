@@ -1,26 +1,25 @@
 package com.example.bookshopapp.services;
 
-import com.example.bookshopapp.data.Author;
 import com.example.bookshopapp.data.Book;
-import com.example.bookshopapp.repositories.BookRepository;
+import com.example.bookshopapp.repositories.JpaBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
 public class BookService {
 
-    private final BookRepository bookRepository;
+    private final JpaBookRepository bookRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository) {
+    public BookService(JpaBookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 
@@ -32,47 +31,58 @@ public class BookService {
         return bookRepository.getReferenceById(id);
     }
 
-    public Page<Book> getPageBooksByAuthor(Author author, Integer offset, Integer limit) {
-        Pageable nextPage = PageRequest.of(offset, limit);
-        return bookRepository.findBooksByAuthorId(author.getId(), nextPage);
+    public Page<Book> getPageBooksByAuthor(Integer authorId,
+                                           Integer offset,
+                                           Integer limit) {
+        int currentOffset = offset == null ? 0 : offset;
+        int currentLimit = limit == null ? 20 : limit;
+        Pageable nextPage = PageRequest.of(currentOffset, currentLimit);
+        return bookRepository.findBooksByAuthorId(authorId, nextPage);
     }
 
-    public Page<Book> getPageOfRecommendedBooks(Integer offset, Integer limit){
-        Pageable nextPage = PageRequest.of(offset,limit);
+    public Page<Book> getPageOfRecommendedBooks(Integer offset,
+                                                Integer limit) {
+        int currentOffset = offset == null ? 0 : offset;
+        int currentLimit = limit == null ? 20 : limit;
+
+        Pageable nextPage = PageRequest.of(currentOffset, currentLimit);
+
         return bookRepository.findAll(nextPage);
-//                bookRepository.findBooksRecommended(nextPage) //TODO:need to make query
+        //TODO: need to make query
+
+        // bookRepository.findBooksRecommended(nextPage)
     }
 
-    public Page<Book> getPageOfPopularBooks(Integer offset, Integer limit) {
-        Pageable nextPage = PageRequest.of(offset,limit);
-        return bookRepository.findAll(nextPage);
-//                bookRepository.findBooksPopular(nextPage)//TODO:need to make query
-    }
+    public Page<Book> getPageOfRecentBooks(String optDateFrom,
+                                           String optDateTo,
+                                           Integer offset,
+                                           Integer limit) {
+        int currentOffset = offset == null ? 0 : offset;
+        int currentLimit = limit == null ? 20 : limit;
 
-    public Page<Book> getPageOfRecentBooks(Optional<String> optDateFrom, Optional<String> optDateTo, Optional<Integer> offset, Optional<Integer> limit) {
-
-        int currentOffset = offset.orElse(0);
-        int currentLimit = limit.orElse(20);
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
-        String stringDateFrom = optDateFrom.orElse(
-                formatter.format(getDateWithShiftByDayByMonthByYear(0,-1,-10)));
-        String stringDateTo = optDateTo.orElse(formatter.format(new Date()));
+        String stringDateFrom = optDateFrom == null ? (LocalDateTime.now().minusMonths(1).format(formatter1)) : optDateFrom;
+        String stringDateTo = optDateTo == null ? (LocalDateTime.now().format(formatter1)) : optDateTo;
 
         LocalDate currentDateFrom = LocalDate.parse(stringDateFrom, formatter1);
         LocalDate currentDateTo = LocalDate.parse(stringDateTo, formatter1);
 
-        Pageable nextPage = PageRequest.of(currentOffset,currentLimit);
-        return bookRepository.findBooksByPubDateBetween(currentDateFrom.atStartOfDay(), currentDateTo.atStartOfDay(), nextPage);
+        Pageable nextPage = PageRequest.of(currentOffset, currentLimit);
+        return bookRepository.findBooksByPubDateBetweenOrdOrderByPubDate(
+                currentDateFrom.atStartOfDay(),
+                currentDateTo.atStartOfDay(),
+                nextPage
+        );
     }
 
-    private Date getDateWithShiftByDayByMonthByYear(int day, int month, int year){
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MONTH, month);
-        cal.add(Calendar.DAY_OF_YEAR,day);
-        cal.add(Calendar.YEAR,year);
-        return cal.getTime();
+    public Page<Book> getBooksByGenreId(int id,
+                                        Integer offset,
+                                        Integer limit) {
+        int currentOffset = offset == null ? 0 : offset;
+        int currentLimit = limit == null ? 20 : limit;
+
+        Pageable nextPage = PageRequest.of(currentOffset, currentLimit);
+        return bookRepository.getBookByGenreId(id, nextPage);
     }
 }

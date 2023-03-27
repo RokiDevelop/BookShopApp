@@ -31,6 +31,4 @@ public class AuthorService {
     public List<Author> findAuthorsByBookId(int id) {
         return authorRepository.findAuthorsByBookId(id);
     }
-
-
 }
