@@ -25,14 +25,14 @@
     <div class="wrap">
         <main class="Middle-main">
             <ul class="breadcrumbs"
-                th:replace="~{fragments/breadcrumb_fragment :: breadcrumps(category=${book.title})}"></ul>
+                th:replace="~{fragments/breadcrumb_fragment :: breadcrumps(category=${book.title}, booksList=${booksList})}"></ul>
             <div class="Product">
                 <div class="ProductCard">
                     <div class="ProductCard-look">
                         <div class="ProductCard-photo"><img src="/assets/img/content/main/card.jpg" alt="card.jpg"/>
                         </div>
                     </div>
-                    <div class="ProductCard-desc" th:replace="~{fragments/book_description_fragment :: bookDesc(${book})}"></div>
+                    <div class="ProductCard-desc" th:replace="~{fragments/book_description_fragment :: bookDesc(book = ${book}, authors = ${authors})}"></div>
                 </div>
                 <div class="Product-comments">
                     <div class="Product-comments-header">

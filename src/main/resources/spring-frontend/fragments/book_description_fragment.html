@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div class="ProductCard-desc" th:fragment="bookDesc (book)">
+<div class="ProductCard-desc" th:fragment="bookDesc (book, authors)">
     <div class="ProductCard-header">
         <h1 class="ProductCard-title" th:text="${book.title}">Мара и морок
         </h1>
-        <div class="ProductCard-author"><span class="ProductCard-titleProp" th:text="#{item.product-card-title-authors}">Автор:</span>&#32;<a
-                href="#" >Лиия Арден</a> <!--th:text="${book.author}"-->
+        <div class="ProductCard-author"><span class="ProductCard-titleProp" th:text="#{item.product-card-title-authors}" >Автор:</span>&#32;<a
+                href="#" th:each="author : ${authors}" th:href="@{'/authors/' + ${author.id}}" th:text="${author.name} + ' '">Лиия Арден</a> <!--th:text="${book.author}"-->
         </div>
         <div class="ProductCard-rating"><span class="ProductCard-titleProp" th:text="#{item.product-card-title-rating}">Рейтинг:</span>
             <button class="trigger trigger_dropdown" type="button">

@@ -2,6 +2,8 @@ package com.example.bookshopapp.controllers;
 
 import com.example.bookshopapp.data.Book;
 import com.example.bookshopapp.services.BookService;
+import com.example.bookshopapp.services.BooksRatingAndPopularService;
+import com.example.bookshopapp.services.GenreService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,80 +17,82 @@ import java.util.List;
 public class MainPageController {
 
     private final BookService bookService;
+    private final BooksRatingAndPopularService booksRatingAndPopularService;
 
     @Autowired
-    public MainPageController(BookService bookService) {
+    public MainPageController(BookService bookService, BooksRatingAndPopularService booksRatingAndPopularService) {
         this.bookService = bookService;
+        this.booksRatingAndPopularService = booksRatingAndPopularService;
     }
 
     @ModelAttribute(value = "bookDataRecommendation")
-    public List<Book> getBookDataRecommendation() {
-        return bookService.getRandomBooksData();
+    public List<Book> getBookDataPageRecommendation() {
+        return bookService.getPageOfRecommendedBooks(0, 20).getContent();
     }
 
-    @ModelAttribute(value = "bookDataPopular")
+    @ModelAttribute(value = "bookDataPagePopular")
     public List<Book> getBookDataPopular() {
-        return bookService.getBooksData();
+        return booksRatingAndPopularService.getBooksByRatingAndPopular(0,20);
     }
 
     @ModelAttribute(value = "bookDataRecent")
-    public List<Book> getBookDataRecent() {
-        return bookService.getRandomBooksData();
+    public List<Book> getBookDataPageRecent() {
+        return bookService.getPageOfRecentBooks(null, null, 0, 20).getContent();
     }
 
     @GetMapping("")
-    public String mainPage(){
+    public String mainPage() {
         return "/index";
     }
 
     @GetMapping("/postponed")
-    public String postponedPage(){
+    public String postponedPage() {
         return "postponed";
     }
 
     @GetMapping("/cart")
-    public String cartPage(){
+    public String cartPage() {
         return "cart";
     }
 
     @GetMapping("/signin")
-    public String signinPage(){
+    public String signinPage() {
         return "signin";
     }
 
     @GetMapping("/about")
-    public String aboutPage(){
+    public String aboutPage() {
         return "about";
     }
 
     @GetMapping("/faq")
-    public String faqPage(){
+    public String faqPage() {
         return "faq";
     }
 
     @GetMapping("/contacts")
-    public String contacts(){
+    public String contacts() {
         return "contacts";
     }
 
     @GetMapping("/profile")
-    public String profilePage(){
+    public String profilePage() {
         return "profile";
     }
 
     @GetMapping("/transactions")
-    public String transactions(){
+    public String transactions() {
         //TODO:
         return null;
     }
 
     @PostMapping("/payment")
-    public String payment(){
+    public String payment() {
         return "redirect:/";
     }
 
     @GetMapping("/my")
-    public String my(){
+    public String my() {
         return "my";
     }
 
@@ -136,8 +140,7 @@ public class MainPageController {
 
     @GetMapping("/main/api")
     @ApiOperation("")
-    public String mainApi(){
+    public String mainApi() {
         return "";
     }
-
 }

@@ -1,24 +1,26 @@
 package com.example.bookshopapp.services;
 
-import com.example.bookshopapp.data.Author;
 import com.example.bookshopapp.data.Book;
-import com.example.bookshopapp.repositories.Book2AuthorRepository;
-import com.example.bookshopapp.repositories.BookRepository;
+import com.example.bookshopapp.repositories.JpaBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
 public class BookService {
 
-    private final BookRepository bookRepository;
-    private final Book2AuthorRepository book2AuthorRepository;
+    private final JpaBookRepository bookRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository, Book2AuthorRepository book2AuthorRepository) {
+    public BookService(JpaBookRepository bookRepository) {
         this.bookRepository = bookRepository;
-        this.book2AuthorRepository = book2AuthorRepository;
     }
 
     public List<Book> getBooksData() {
@@ -29,37 +31,58 @@ public class BookService {
         return bookRepository.getReferenceById(id);
     }
 
-    public List<Book> getRandomBooksData() {
-        List<Book> list = getBooksData();
-        Collections.shuffle(list);
-        return list;
+    public Page<Book> getPageBooksByAuthor(Integer authorId,
+                                           Integer offset,
+                                           Integer limit) {
+        int currentOffset = offset == null ? 0 : offset;
+        int currentLimit = limit == null ? 20 : limit;
+        Pageable nextPage = PageRequest.of(currentOffset, currentLimit);
+        return bookRepository.findBooksByAuthorId(authorId, nextPage);
     }
 
-    public List<Book> getBooksByAuthor(Author author) {
-        List<Integer> booksId = book2AuthorRepository.getAllByAuthorId(author.getId());
-        List<Book> books = bookRepository.findBooksByIdList(booksId);
-        return books;
+    public Page<Book> getPageOfRecommendedBooks(Integer offset,
+                                                Integer limit) {
+        int currentOffset = offset == null ? 0 : offset;
+        int currentLimit = limit == null ? 20 : limit;
+
+        Pageable nextPage = PageRequest.of(currentOffset, currentLimit);
+
+        return bookRepository.findAll(nextPage);
+        //TODO: need to make query
+
+        // bookRepository.findBooksRecommended(nextPage)
     }
 
-    public List<Book> getRecommendedBooks() {
-        //TODO: edit result list by recommendation;
-        List<Book> books;
-        books = getBooksData();
-        return books;
+    public Page<Book> getPageOfRecentBooks(String optDateFrom,
+                                           String optDateTo,
+                                           Integer offset,
+                                           Integer limit) {
+        int currentOffset = offset == null ? 0 : offset;
+        int currentLimit = limit == null ? 20 : limit;
+
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+        String stringDateFrom = optDateFrom == null ? (LocalDateTime.now().minusMonths(1).format(formatter1)) : optDateFrom;
+        String stringDateTo = optDateTo == null ? (LocalDateTime.now().format(formatter1)) : optDateTo;
+
+        LocalDate currentDateFrom = LocalDate.parse(stringDateFrom, formatter1);
+        LocalDate currentDateTo = LocalDate.parse(stringDateTo, formatter1);
+
+        Pageable nextPage = PageRequest.of(currentOffset, currentLimit);
+        return bookRepository.findBooksByPubDateBetweenOrdOrderByPubDate(
+                currentDateFrom.atStartOfDay(),
+                currentDateTo.atStartOfDay(),
+                nextPage
+        );
     }
 
+    public Page<Book> getBooksByGenreId(int id,
+                                        Integer offset,
+                                        Integer limit) {
+        int currentOffset = offset == null ? 0 : offset;
+        int currentLimit = limit == null ? 20 : limit;
 
-    public List<Book> getPopularBooks() {
-        //TODO: edit result list by popular;
-        List<Book> books;
-        books = getBooksData();
-        return books;
-    }
-
-    public List<Book> getRecentBooks() {
-        //TODO: edit result list by recent;
-        List<Book> books;
-        books = getBooksData();
-        return books;
+        Pageable nextPage = PageRequest.of(currentOffset, currentLimit);
+        return bookRepository.getBookByGenreId(id, nextPage);
     }
 }
