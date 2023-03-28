@@ -1,12 +1,12 @@
 package com.example.bookshopapp.data.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @ToString
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookWithGenreDto {
     Integer book_id;
     Integer genreId;

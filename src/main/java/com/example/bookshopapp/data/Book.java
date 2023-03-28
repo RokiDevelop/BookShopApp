@@ -1,6 +1,7 @@
 package com.example.bookshopapp.data;
 
 import com.example.bookshopapp.data.book.links.Book2AuthorEntity;
+import com.example.bookshopapp.data.tag.TagEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "book")
@@ -52,6 +54,13 @@ public class Book {
 
     @ManyToMany(mappedBy = "bookId")
     private List<Book2AuthorEntity> book2AuthorSet;
+
+    @ManyToMany
+    @JoinTable(
+            name = "book2tag",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private Set<TagEntity> tags;
 
     @Override
     public String toString() {

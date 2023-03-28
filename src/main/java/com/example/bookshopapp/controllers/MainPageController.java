@@ -1,9 +1,10 @@
 package com.example.bookshopapp.controllers;
 
 import com.example.bookshopapp.data.Book;
+import com.example.bookshopapp.data.dto.TagDto;
 import com.example.bookshopapp.services.BookService;
 import com.example.bookshopapp.services.BooksRatingAndPopularService;
-import com.example.bookshopapp.services.GenreService;
+import com.example.bookshopapp.services.TagService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,14 @@ import java.util.List;
 @Api
 public class MainPageController {
 
+    private final TagService tagService;
     private final BookService bookService;
     private final BooksRatingAndPopularService booksRatingAndPopularService;
 
+
     @Autowired
-    public MainPageController(BookService bookService, BooksRatingAndPopularService booksRatingAndPopularService) {
+    public MainPageController(TagService tagService, BookService bookService, BooksRatingAndPopularService booksRatingAndPopularService) {
+        this.tagService = tagService;
         this.bookService = bookService;
         this.booksRatingAndPopularService = booksRatingAndPopularService;
     }
@@ -38,6 +42,11 @@ public class MainPageController {
     @ModelAttribute(value = "bookDataRecent")
     public List<Book> getBookDataPageRecent() {
         return bookService.getPageOfRecentBooks(null, null, 0, 20).getContent();
+    }
+
+    @ModelAttribute(value = "dataForCloud")
+    public List<TagDto> getTagsWithAmount() {
+        return tagService.getTagsWithAmount();
     }
 
     @GetMapping("")

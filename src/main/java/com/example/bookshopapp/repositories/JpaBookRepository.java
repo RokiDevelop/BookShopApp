@@ -14,6 +14,9 @@ import java.util.List;
 @Repository
 public interface JpaBookRepository extends JpaRepository<Book, Integer>, BookRepository {
 
+    @Query(value = "SELECT b from Book b JOIN Book2TagEntity b2t ON b.id = b2t.book.id where b2t.tag.id = :id")
+    Page<Book> findAllByTagId(@Param("id") Long id, Pageable pageable);
+
     @Query(value = "SELECT b " +
             "FROM Book b " +
             "left join Book2AuthorEntity b2a ON b2a.bookId = b.id " +
@@ -29,8 +32,6 @@ public interface JpaBookRepository extends JpaRepository<Book, Integer>, BookRep
 
     List<Book> findBooksByPriceIs(Integer price);
 
-//    List<Book> findBooksByPubDateBetween(LocalDateTime minDate, LocalDateTime maxDate);
-
     @Query(value = "SELECT b FROM Book b WHERE b.pubDate between :min_date AND :max_date ORDER BY b.pubDate")
     Page<Book> findBooksByPubDateBetweenOrdOrderByPubDate(@Param("min_date") LocalDateTime minDate, @Param("max_date") LocalDateTime maxDate, Pageable nextPage);
 
@@ -44,7 +45,7 @@ public interface JpaBookRepository extends JpaRepository<Book, Integer>, BookRep
 
     @Query(value = "SELECT b.* " +
             "FROM book2genre b2g " +
-            "LEFT JOIN book b ON b2g.book_id = b.id " +
-            "WHERE b2g.genre_id = :genre_id", nativeQuery = true)
+            "JOIN book b ON b2g.book_id = b.id " +
+                "WHERE b2g.genre_id = :genre_id", nativeQuery = true)
     Page<Book> getBookByGenreId(@Param("genre_id") Integer genre_id, Pageable nextPage);
 }
