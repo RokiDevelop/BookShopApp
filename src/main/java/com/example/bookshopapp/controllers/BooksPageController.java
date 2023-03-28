@@ -4,10 +4,7 @@ import com.example.bookshopapp.data.Author;
 import com.example.bookshopapp.data.Book;
 import com.example.bookshopapp.data.dto.AbstractBooksDto;
 import com.example.bookshopapp.data.dto.RecommendedBookDto;
-import com.example.bookshopapp.services.AuthorService;
-import com.example.bookshopapp.services.BookService;
-import com.example.bookshopapp.services.BooksRatingAndPopularService;
-import com.example.bookshopapp.services.GenreService;
+import com.example.bookshopapp.services.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
@@ -26,14 +23,16 @@ public class BooksPageController {
     private final BooksRatingAndPopularService popularService;
     private final AuthorService authorService;
     private final GenreService genreService;
+    private final TagService tagService;
 
     public BooksPageController(BookService bookService,
                                AuthorService authorService,
-                               BooksRatingAndPopularService popularService, GenreService genreService) {
+                               BooksRatingAndPopularService popularService, GenreService genreService, TagService tagService) {
         this.bookService = bookService;
         this.authorService = authorService;
         this.popularService = popularService;
         this.genreService = genreService;
+        this.tagService = tagService;
     }
 
     @GetMapping("/recent")
@@ -84,14 +83,14 @@ public class BooksPageController {
 
 
     @GetMapping("/genre/{id}")
-    public String genresById(@PathVariable(value = "id") int id, Model model){
+    public String genresById(@PathVariable(value = "id") Integer id, Model model){
         model.addAttribute("category", genreService.getGenreById(id).getName());
         model.addAttribute("booksData", bookService.getBooksByGenreId(id, null, null).getContent());
         return "genres/slug";
     }
 
     @GetMapping("/{id}")
-    public String book(@PathVariable(value = "id") int id, Model model) throws Exception {
+    public String book(@PathVariable(value = "id") Integer id, Model model) throws Exception {
         Book book = bookService.getBookById(id);
         List<Author> authors = authorService.findAuthorsByBookId(book.getId());
 
@@ -106,9 +105,12 @@ public class BooksPageController {
     }
 
     @GetMapping("/tag/{id}")
-    public String tagById(@PathVariable(value = "id") int id, Model model) {
-        //TODO: set return string
-        return null;
+    public String tagById(@PathVariable(value = "id") Long id,
+                          @RequestParam(value = "offset", required = false) Integer offset,
+                          @RequestParam(value = "limit", required = false) Integer limit,
+                          Model model) {
+        model.addAttribute("booksData", tagService.getBooksByTagId(id, offset, limit).getContent());
+        return "tags/index";
     }
 
     @GetMapping("/api")

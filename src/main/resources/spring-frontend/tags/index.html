@@ -24,7 +24,7 @@
     <div class="wrap">
         <main class="Middle-main">
             <ul class="breadcrumbs"
-                th:replace="~{fragments/breadcrumb_fragment :: breadcrumps(category='Психологическая проза', booksList=${booksList})}"></ul>
+                th:replace="~{fragments/breadcrumb_fragment :: breadcrumps(category='Психологическая проза')}"></ul>
             <div class="Section">
                 <div class="Section-header">
                     <h1 class="Section-title">Психологическая проза
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="Cards Cards_refresh"
-                     th:replace="~{fragments/books_pool_fragment :: pool(category='tag')}"></div>
+                     th:replace="~{fragments/books_pool_fragment :: pool(category='tag', booksData=${booksData})}"></div>
             </div>
         </main>
     </div>
