@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "author")
@@ -37,11 +39,28 @@ public class Author {
     @ApiModelProperty(value = "any information about author", example = "Bob was born in San Francisco and lived there for 10 years", position = 3)
     private String description;
 
+    @ManyToMany(mappedBy = "authors")
+    private Set<Book> books = new HashSet<>();
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
+
+    public void addBook(Book book) {
+        books.add(book);
+        book.getAuthors().add(this);
+    }
+
+    public void removeBook(Book book) {
+        books.remove(book);
+        book.getAuthors().remove(this);
+    }
+
     @Override
     public String toString() {
         return "Author{" +
                 "id=" + id +
                 ", name='" + name +
-                '}';
+                "'}";
     }
 }

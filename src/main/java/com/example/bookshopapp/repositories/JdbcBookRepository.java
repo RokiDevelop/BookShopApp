@@ -1,7 +1,9 @@
 package com.example.bookshopapp.repositories;
 
 import com.example.bookshopapp.data.Book;
+import liquibase.pro.packaged.L;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,6 +16,11 @@ public class JdbcBookRepository implements BookRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    public Long getBooksCount() {
+        String q = "SELECT count(*) FROM BOOK";
+        return jdbcTemplate.queryForObject(q, Long.class);
+    }
 
     public List<Book> getPopularBooks(Pageable nextPage) {
         String q = "WITH PAID_BOOKS AS ( " +

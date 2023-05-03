@@ -45,7 +45,7 @@ public class AuthorsPageController {
                                     @RequestParam(value = "limit", required = false) Integer limit,
                                     Model model) {
         Author author = authorService.getAuthorById(authorId);
-        AbstractBooksDto booksDto =  new BookDto( bookService.getPageBooksByAuthor(authorId, offset, limit).getContent());
+        AbstractBooksDto booksDto =  new BookDto( bookService.getPageBooksByAuthor(author, offset, limit).getContent());
 
         model.addAttribute("author", author);
         model.addAttribute("booksData", booksDto);

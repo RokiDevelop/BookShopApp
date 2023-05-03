@@ -1,7 +1,7 @@
 package com.example.bookshopapp.controllers;
 
 import com.example.bookshopapp.data.Book;
-import com.example.bookshopapp.data.dto.TagDto;
+import com.example.bookshopapp.data.dto.*;
 import com.example.bookshopapp.services.BookService;
 import com.example.bookshopapp.services.BooksRatingAndPopularService;
 import com.example.bookshopapp.services.TagService;
@@ -30,18 +30,21 @@ public class MainPageController {
     }
 
     @ModelAttribute(value = "bookDataRecommendation")
-    public List<Book> getBookDataPageRecommendation() {
-        return bookService.getPageOfRecommendedBooks(0, 20).getContent();
+    public AbstractBooksDto getBookDataPageRecommendation() {
+        AbstractBooksDto booksDto = new RecommendedBookDto(bookService.getPageOfRecommendedBooks(0, 20).getContent());
+        return booksDto;
     }
 
     @ModelAttribute(value = "bookDataPagePopular")
-    public List<Book> getBookDataPopular() {
-        return booksRatingAndPopularService.getBooksByRatingAndPopular(0,20);
+    public AbstractBooksDto getBookDataPopular() {
+        AbstractBooksDto booksDto = new PopularBooksDto(booksRatingAndPopularService.getBooksByRatingAndPopular(0,20).getContent());
+        return booksDto;
     }
 
     @ModelAttribute(value = "bookDataRecent")
-    public List<Book> getBookDataPageRecent() {
-        return bookService.getPageOfRecentBooks(null, null, 0, 20).getContent();
+    public AbstractBooksDto getBookDataPageRecent() {
+        AbstractBooksDto booksDto = new RecentBooksDto(bookService.getPageOfRecentBooks(null, null,0, 20).getContent());
+        return booksDto;
     }
 
     @ModelAttribute(value = "dataForCloud")
@@ -52,16 +55,6 @@ public class MainPageController {
     @GetMapping("")
     public String mainPage() {
         return "/index";
-    }
-
-    @GetMapping("/postponed")
-    public String postponedPage() {
-        return "postponed";
-    }
-
-    @GetMapping("/cart")
-    public String cartPage() {
-        return "cart";
     }
 
     @GetMapping("/signin")

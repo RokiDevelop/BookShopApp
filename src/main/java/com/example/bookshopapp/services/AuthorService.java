@@ -1,6 +1,7 @@
 package com.example.bookshopapp.services;
 
 import com.example.bookshopapp.data.Author;
+import com.example.bookshopapp.data.Book;
 import com.example.bookshopapp.repositories.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class AuthorService {
     }
 
 
-    public List<Author> findAuthorsByBookId(int id) {
-        return authorRepository.findAuthorsByBookId(id);
+    public List<Author> findAuthorsByBookId(Book book) {
+        return authorRepository.findByBooks(book.getId());
     }
 }

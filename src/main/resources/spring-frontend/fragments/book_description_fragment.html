@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
 <div class="ProductCard-desc" th:fragment="bookDesc (book, authors)">
+    <!--/*@thymesVar id="book" type="com.example.bookshopapp.data.Book"*/-->
     <div class="ProductCard-header">
         <h1 class="ProductCard-title" th:text="${book.title}">Мара и морок
         </h1>
+        <!--/*@thymesVar id="author" type="com.example.bookshopapp.data.Author"*/-->
         <div class="ProductCard-author"><span class="ProductCard-titleProp" th:text="#{item.product-card-title-authors}" >Автор:</span>&#32;<a
                 href="#" th:each="author : ${authors}" th:href="@{'/authors/' + ${author.id}}" th:text="${author.name} + ' '">Лиия Арден</a> <!--th:text="${book.author}"-->
         </div>
@@ -325,11 +328,11 @@
                 href="/tags/">Современные</a>,&#32;<a href="/tags/">Психологическая проза</a>
         </div>
         <div class="ProductCard-cost"><span class="ProductCard-titleProp" th:text="#{item.product-card-title-price}">Цена:</span>
-            <span class="ProductCard-priceOld" th:if="${book.discount != null}" th:text="${book.discount}">₽300</span>
-            <span class="ProductCard-price" th:text="${book.price}">₽180</span>
+            <span class="Card-priceOld" th:if="${book.discount != 0}" th:text="${'₽' + book.price}">₽300.00</span>
+            <span class="Card-price" th:text="${book.discount == 0 ? '₽' + book.price : '₽' + book.discountPrice()}">₽190.00</span>
         </div>
     </div>
-    <div class="ProductCard-text">
+    <div class="ProductCard-text" th:text="${book.description}">
         <p>Таких, как я, называют Марами - отмеченными самой богиней смерти Мораной. Когда-то у меня
             и моих шести сестер был свой путь. Тогда люди нас уважали и просили о милосердии. Они
             приносили нам подношения и молились нам. Но 200 лет назад все изменилось, когда принц
@@ -339,6 +342,11 @@
             кого я никогда не пойду. Таких, как он, называют Морок, и их боятся абсолютно все.
         </p>
     </div>
-    <div th:replace="~{fragments/book_slug_buttons_fragment :: panel}"></div>
+    <div th:replace="~{fragments/book_slug_buttons_fragment :: panel (bookData = ${book})}"></div>
+
+
 </div>
+
+</body>
+<script src="/assets/js/UploadNewBookImageScript.js"></script>
 </html>
