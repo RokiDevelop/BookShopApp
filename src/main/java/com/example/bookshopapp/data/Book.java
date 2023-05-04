@@ -1,7 +1,6 @@
 package com.example.bookshopapp.data;
 
 import com.example.bookshopapp.data.book.file.BookFile;
-import com.example.bookshopapp.data.book.links.Book2AuthorEntity;
 import com.example.bookshopapp.data.tag.TagEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "book")

@@ -85,7 +85,7 @@
                                 <div class="Cart-buttons">
                                     <div class="Cart-btn">
                                         <button class="btn btn_primary btn_outline" data-sendstatus="KEPT"
-                                                th:attr="data-bookid = ${'cart/remove/' + book.slug}"
+                                                th:attr="data-bookid = ${book.slug}"
                                                 data-bookid="[1122]"><span class="btn-icon"><img
                                                 src="/assets/img/icons/heart.svg" alt="heart.svg"/></span><span
                                                 class="btn-content" th:text="#{product-card-cart.buy-block-button-text}">Отложить</span>
@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="Cart-btn">
                                         <button class="btn btn_danger btn_outline" data-sendstatus="UNLINK"
-                                                th:attr="data-bookid = ${'cart/remove/' + book.slug}"
+                                                th:attr="data-bookid = ${book.slug}"
                                                 data-bookid="[1122]"><span class="btn-icon"><img
                                                 src="/assets/img/icons/trash.svg" alt="trash.svg"/></span><span
                                                 class="btn-content" th:text="#{product-card-cart.delete-button-text}" >Удалить</span>

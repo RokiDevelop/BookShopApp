@@ -1,9 +1,7 @@
 package com.example.bookshopapp.repositories;
 
 import com.example.bookshopapp.data.Book;
-import liquibase.pro.packaged.L;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

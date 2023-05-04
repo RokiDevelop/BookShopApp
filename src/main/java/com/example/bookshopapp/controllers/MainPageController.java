@@ -1,6 +1,5 @@
 package com.example.bookshopapp.controllers;
 
-import com.example.bookshopapp.data.Book;
 import com.example.bookshopapp.data.dto.*;
 import com.example.bookshopapp.services.BookService;
 import com.example.bookshopapp.services.BooksRatingAndPopularService;
@@ -31,20 +30,17 @@ public class MainPageController {
 
     @ModelAttribute(value = "bookDataRecommendation")
     public AbstractBooksDto getBookDataPageRecommendation() {
-        AbstractBooksDto booksDto = new RecommendedBookDto(bookService.getPageOfRecommendedBooks(0, 20).getContent());
-        return booksDto;
+        return new RecommendedBookDto(bookService.getPageOfRecommendedBooks(0, 20).getContent());
     }
 
     @ModelAttribute(value = "bookDataPagePopular")
     public AbstractBooksDto getBookDataPopular() {
-        AbstractBooksDto booksDto = new PopularBooksDto(booksRatingAndPopularService.getBooksByRatingAndPopular(0,20).getContent());
-        return booksDto;
+        return new PopularBooksDto(booksRatingAndPopularService.getBooksByRatingAndPopular(0,20).getContent());
     }
 
     @ModelAttribute(value = "bookDataRecent")
     public AbstractBooksDto getBookDataPageRecent() {
-        AbstractBooksDto booksDto = new RecentBooksDto(bookService.getPageOfRecentBooks(null, null,0, 20).getContent());
-        return booksDto;
+        return new RecentBooksDto(bookService.getPageOfRecentBooks(null, null,0, 20).getContent());
     }
 
     @ModelAttribute(value = "dataForCloud")

@@ -2,7 +2,6 @@ package com.example.bookshopapp.services;
 
 import com.example.bookshopapp.data.Book;
 import com.example.bookshopapp.repositories.JdbcBookRepository;
-import com.example.bookshopapp.repositories.JpaBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

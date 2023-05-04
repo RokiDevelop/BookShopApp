@@ -1,7 +1,6 @@
 package com.example.bookshopapp.repositories;
 
 import com.example.bookshopapp.data.Author;
-import com.example.bookshopapp.data.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
