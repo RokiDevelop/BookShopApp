@@ -106,20 +106,8 @@ public class MainPageController {
         return null;
     }
 
-    @PostMapping("/bookReview")
-    public String bookReview() {
-        //TODO:
-        return null;
-    }
-
     @PostMapping("/changeBookStatus")
     public String changeBookStatus() {
-        //TODO:
-        return null;
-    }
-
-    @PostMapping("/rateBookReview")
-    public String rateBookReview() {
         //TODO:
         return null;
     }

@@ -2,11 +2,8 @@ package com.example.bookshopapp.controllers;
 
 import com.example.bookshopapp.data.Author;
 import com.example.bookshopapp.data.Book;
+import com.example.bookshopapp.data.dto.*;
 import com.example.bookshopapp.repositories.ResourceStorage;
-import com.example.bookshopapp.data.dto.AbstractBooksDto;
-import com.example.bookshopapp.data.dto.BookDto;
-import com.example.bookshopapp.data.dto.PopularBooksDto;
-import com.example.bookshopapp.data.dto.RecommendedBookDto;
 import com.example.bookshopapp.services.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,6 +28,7 @@ import java.util.logging.Logger;
 public class BooksPageController {
 
     private final BookService bookService;
+    private final BookReviewService reviewService;
     private final BooksRatingAndPopularService popularService;
     private final AuthorService authorService;
     private final GenreService genreService;
@@ -40,9 +38,10 @@ public class BooksPageController {
 
     @Autowired
     public BooksPageController(BookService bookService,
-                               AuthorService authorService,
+                               BookReviewService reviewService, AuthorService authorService,
                                BooksRatingAndPopularService popularService, GenreService genreService, TagService tagService, ResourceStorage storage) {
         this.bookService = bookService;
+        this.reviewService = reviewService;
         this.authorService = authorService;
         this.popularService = popularService;
         this.genreService = genreService;
@@ -112,8 +111,12 @@ public class BooksPageController {
         Book book = bookService.getBookBySlug(slug);
         List<Author> authors = authorService.findAuthorsByBookId(book);
 
+        List<BookReviewDto> reviewDtoList = reviewService.getBookReview(book.getId());
+
+        model.addAttribute("reviewList", reviewDtoList);
         model.addAttribute("book", book);
         model.addAttribute("authors", authors);
+
         return "books/slug";
     }
 

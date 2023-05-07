@@ -48,7 +48,7 @@
                         </h3><span class="Product-comments-amount" th:text="'567 '+#{middle-fragment-text.product-comments-amount}">567 отзывов</span>
                     </div>
                 </div>
-                <div th:replace="~{fragments/book_reviews_fragment :: reviewBlock}"></div>
+                <div th:replace="~{fragments/book_reviews_fragment :: reviewBlock(${reviewList})}"></div>
             </div>
         </main>
     </div>
