@@ -1,5 +1,6 @@
 package com.example.bookshopapp.services;
 
+import com.example.bookshopapp.data.Author;
 import com.example.bookshopapp.data.Book;
 import com.example.bookshopapp.repositories.JpaBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,14 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class BookService {
 
     private final JpaBookRepository bookRepository;
+
 
     @Autowired
     public BookService(JpaBookRepository bookRepository) {
@@ -31,13 +34,14 @@ public class BookService {
         return bookRepository.getReferenceById(id);
     }
 
-    public Page<Book> getPageBooksByAuthor(Integer authorId,
+    public Page<Book> getPageBooksByAuthor(Author author,
                                            Integer offset,
                                            Integer limit) {
         int currentOffset = offset == null ? 0 : offset;
         int currentLimit = limit == null ? 20 : limit;
         Pageable nextPage = PageRequest.of(currentOffset, currentLimit);
-        return bookRepository.findBooksByAuthorId(authorId, nextPage);
+
+        return bookRepository.findByAuthor(author.getId(), nextPage);
     }
 
     public Page<Book> getPageOfRecommendedBooks(Integer offset,
@@ -76,6 +80,10 @@ public class BookService {
         );
     }
 
+    public Book getBookBySlug(String slug) {
+        return bookRepository.findBooksBySlug(slug);
+    }
+
     public Page<Book> getBooksByGenreId(int id,
                                         Integer offset,
                                         Integer limit) {
@@ -84,5 +92,13 @@ public class BookService {
 
         Pageable nextPage = PageRequest.of(currentOffset, currentLimit);
         return bookRepository.getBookByGenreId(id, nextPage);
+    }
+
+    public void save(Book bookToUpdate) {
+        bookRepository.save(bookToUpdate);
+    }
+
+    public List<Book> findBooksBySlugIn(String[] slugs) {
+        return bookRepository.findBooksBySlugIn(Arrays.asList(slugs));
     }
 }

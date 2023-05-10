@@ -1,5 +1,7 @@
 package com.example.bookshopapp.data.book.file;
 
+import com.example.bookshopapp.data.Book;
+import com.example.bookshopapp.data.enums.BookFileType;
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,4 +28,12 @@ public class BookFile {
 
     @Column(name = "path", columnDefinition = "VARCHAR(255)", nullable = false)
     private String path;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    private Book book;
+
+    public String getBookFileExtensionString() {
+        return BookFileType.getStringByTypeId(typeId.getId());
+    }
 }

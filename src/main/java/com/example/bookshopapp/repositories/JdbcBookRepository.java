@@ -15,6 +15,11 @@ public class JdbcBookRepository implements BookRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    public Long getBooksCount() {
+        String q = "SELECT count(*) FROM BOOK";
+        return jdbcTemplate.queryForObject(q, Long.class);
+    }
+
     public List<Book> getPopularBooks(Pageable nextPage) {
         String q = "WITH PAID_BOOKS AS ( " +
                 "    SELECT B2U.BOOK_ID , COUNT(B2U.USER_ID) AS PAID_COUNT " +

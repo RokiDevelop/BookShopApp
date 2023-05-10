@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -16,12 +17,6 @@ public interface JpaBookRepository extends JpaRepository<Book, Integer>, BookRep
 
     @Query(value = "SELECT b from Book b JOIN Book2TagEntity b2t ON b.id = b2t.book.id where b2t.tag.id = :id")
     Page<Book> findAllByTagId(@Param("id") Long id, Pageable pageable);
-
-    @Query(value = "SELECT b " +
-            "FROM Book b " +
-            "left join Book2AuthorEntity b2a ON b2a.bookId = b.id " +
-            "WHERE b2a.authorId = :author_id")
-    Page<Book> findBooksByAuthorId(@Param("author_id") Integer authorId, Pageable nextPage);
 
     @Query(value = "FROM Book WHERE isBestseller = 1")
     List<Book> findBooksByIsBestseller();
@@ -46,6 +41,19 @@ public interface JpaBookRepository extends JpaRepository<Book, Integer>, BookRep
     @Query(value = "SELECT b.* " +
             "FROM book2genre b2g " +
             "JOIN book b ON b2g.book_id = b.id " +
-                "WHERE b2g.genre_id = :genre_id", nativeQuery = true)
-    Page<Book> getBookByGenreId(@Param("genre_id") Integer genre_id, Pageable nextPage);
+                "WHERE b2g.genre_id = :genre_id",
+            countQuery = "SELECT count(*) FROM book2genre b2g WHERE b2g.genre_id = :genre_id",
+            nativeQuery = true)
+    Page<Book> getBookByGenreId(@Param("genre_id") Integer genre_id, Pageable pageable);
+
+    Book findBooksBySlug(String slug);
+
+    @Query(value = "SELECT b.* FROM Book2Author b2a " +
+            "JOIN book b ON b2a.book_id = b.id " +
+            "WHERE b2a.author_id = :author_id",
+            countQuery = "SELECT count(*) FROM Book2Author b2a WHERE b2a.author_id = :author_id",
+            nativeQuery = true)
+    Page<Book> findByAuthor(@Param("author_id")Integer author, Pageable pageable);
+
+    List<Book> findBooksBySlugIn(Collection<String> slug);
 }

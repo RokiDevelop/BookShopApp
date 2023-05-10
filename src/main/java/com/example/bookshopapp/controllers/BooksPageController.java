@@ -2,17 +2,25 @@ package com.example.bookshopapp.controllers;
 
 import com.example.bookshopapp.data.Author;
 import com.example.bookshopapp.data.Book;
-import com.example.bookshopapp.data.dto.AbstractBooksDto;
-import com.example.bookshopapp.data.dto.RecommendedBookDto;
+import com.example.bookshopapp.data.dto.*;
+import com.example.bookshopapp.repositories.ResourceStorage;
 import com.example.bookshopapp.services.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.data.domain.Page;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.*;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/books")
@@ -20,19 +28,27 @@ import java.util.*;
 public class BooksPageController {
 
     private final BookService bookService;
+    private final BookReviewService reviewService;
     private final BooksRatingAndPopularService popularService;
     private final AuthorService authorService;
     private final GenreService genreService;
     private final TagService tagService;
+    private final ResourceStorage storage;
+    private final BookRatingService ratingService;
 
+
+    @Autowired
     public BooksPageController(BookService bookService,
-                               AuthorService authorService,
-                               BooksRatingAndPopularService popularService, GenreService genreService, TagService tagService) {
+                               BookReviewService reviewService, AuthorService authorService,
+                               BooksRatingAndPopularService popularService, GenreService genreService, TagService tagService, ResourceStorage storage, BookRatingService ratingService) {
         this.bookService = bookService;
+        this.reviewService = reviewService;
         this.authorService = authorService;
         this.popularService = popularService;
         this.genreService = genreService;
         this.tagService = tagService;
+        this.storage = storage;
+        this.ratingService = ratingService;
     }
 
     @GetMapping("/recent")
@@ -42,8 +58,9 @@ public class BooksPageController {
                              @RequestParam(value = "limit", required = false) Integer limit,
                              Model model) {
 
-        model.addAttribute("bookDataRecent", bookService.getPageOfRecentBooks(
+        AbstractBooksDto booksDto =  new PopularBooksDto(bookService.getPageOfRecentBooks(
                 optDateFrom, optDateTo, offset, limit).getContent());
+        model.addAttribute("bookDataRecent", booksDto);
         return "books/recent";
     }
 
@@ -55,8 +72,9 @@ public class BooksPageController {
         int currentOffset = offset == null ? 0 : offset;
         int currentLimit = limit == null ? 20 : limit;
 
-        model.addAttribute("bookDataPopular",
-                popularService.getBooksByRatingAndPopular(currentOffset, currentLimit));
+        AbstractBooksDto booksDto =  new PopularBooksDto(popularService.getBooksByRatingAndPopular(currentOffset, currentLimit).getContent());
+
+        model.addAttribute("bookDataPopular",booksDto);
 
         return "books/popular";
     }
@@ -73,29 +91,35 @@ public class BooksPageController {
                                 @RequestParam("limit") Optional<Integer> limit,
                                 Model model) {
         Author author = authorService.getAuthorById(authorId);
-
-        Page<Book> bookPage = bookService.getPageBooksByAuthor(authorId, offset.orElse(0), limit.orElse(20));
+        AbstractBooksDto booksDto =  new BookDto( bookService.getPageBooksByAuthor(author, offset.orElse(0), limit.orElse(20)).getContent());
 
         model.addAttribute("author", author);
-        model.addAttribute("booksData", bookPage.getContent());
+        model.addAttribute("booksData", booksDto);
         return "books/author";
     }
 
 
     @GetMapping("/genre/{id}")
     public String genresById(@PathVariable(value = "id") Integer id, Model model){
+        AbstractBooksDto booksDto =  new BookDto( bookService.getBooksByGenreId(id, null, null).getContent());
+
         model.addAttribute("category", genreService.getGenreById(id).getName());
-        model.addAttribute("booksData", bookService.getBooksByGenreId(id, null, null).getContent());
+        model.addAttribute("booksData", booksDto);
         return "genres/slug";
     }
 
-    @GetMapping("/{id}")
-    public String book(@PathVariable(value = "id") Integer id, Model model) throws Exception {
-        Book book = bookService.getBookById(id);
-        List<Author> authors = authorService.findAuthorsByBookId(book.getId());
+    @GetMapping("/{slug}")
+    public String book(@PathVariable(value = "slug") String slug, Model model) throws Exception {
+        Book book = bookService.getBookBySlug(slug);
+        List<Author> authors = authorService.findAuthorsByBookId(book);
 
+        List<BookReviewDto> reviewDtoList = reviewService.getBookReview(book.getId());
+
+        model.addAttribute("reviewList", reviewDtoList);
         model.addAttribute("book", book);
         model.addAttribute("authors", authors);
+        model.addAttribute("ratingData", ratingService.getRatingByBookId(book.getId()));
+
         return "books/slug";
     }
 
@@ -118,5 +142,34 @@ public class BooksPageController {
     @ResponseBody
     public List<Book> booksApi() {
         return bookService.getBooksData();
+    }
+
+    @PostMapping("/{slug}/img/save")
+    public String saveNewBookImage(@RequestParam("file") MultipartFile file, @PathVariable("slug") String slug) throws IOException {
+
+        String savePath = storage.saveNewBookImage(file, slug);
+        Book bookToUpdate = bookService.getBookBySlug(slug);
+        bookToUpdate.setImage(savePath);
+        bookService.save(bookToUpdate); //save new path in db here
+
+        return ("redirect:/books/" + slug);
+    }
+
+    @GetMapping("/download/{hash}")
+    public ResponseEntity<ByteArrayResource> bookFile(@PathVariable("hash")String hash) throws IOException{
+        Path path = storage.getBookFilePath(hash);
+        Logger.getLogger(this.getClass().getSimpleName()).info("book file path: "+path);
+
+        MediaType mediaType = storage.getBookFileMime(hash);
+        Logger.getLogger(this.getClass().getSimpleName()).info("book file mime type: "+mediaType);
+
+        byte[] data = storage.getBookFileByteArray(hash);
+        Logger.getLogger(this.getClass().getSimpleName()).info("book file data len: "+data.length);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename="+path.getFileName().toString())
+                .contentType(mediaType)
+                .contentLength(data.length)
+                .body(new ByteArrayResource(data));
     }
 }

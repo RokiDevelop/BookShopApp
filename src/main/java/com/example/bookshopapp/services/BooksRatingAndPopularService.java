@@ -2,8 +2,9 @@ package com.example.bookshopapp.services;
 
 import com.example.bookshopapp.data.Book;
 import com.example.bookshopapp.repositories.JdbcBookRepository;
-import com.example.bookshopapp.repositories.JpaBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,11 +20,13 @@ public class BooksRatingAndPopularService {
         this.jdbcBookRepository = jdbcBookRepository;
     }
 
-    public List<Book> getBooksByRatingAndPopular(Integer offset,
-                                                 Integer limit){
+    public Page<Book> getBooksByRatingAndPopular(Integer offset,
+                                      Integer limit){
 
         Pageable nextPage = PageRequest.of(offset, limit);
 
-        return jdbcBookRepository.getPopularBooks(nextPage);
+        List<Book> resultList = jdbcBookRepository.getPopularBooks(nextPage);
+
+        return new PageImpl<>(resultList, nextPage, jdbcBookRepository.getBooksCount());
     }
 }

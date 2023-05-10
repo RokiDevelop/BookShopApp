@@ -1,7 +1,6 @@
 package com.example.bookshopapp.controllers;
 
-import com.example.bookshopapp.data.Book;
-import com.example.bookshopapp.data.dto.TagDto;
+import com.example.bookshopapp.data.dto.*;
 import com.example.bookshopapp.services.BookService;
 import com.example.bookshopapp.services.BooksRatingAndPopularService;
 import com.example.bookshopapp.services.TagService;
@@ -30,18 +29,18 @@ public class MainPageController {
     }
 
     @ModelAttribute(value = "bookDataRecommendation")
-    public List<Book> getBookDataPageRecommendation() {
-        return bookService.getPageOfRecommendedBooks(0, 20).getContent();
+    public AbstractBooksDto getBookDataPageRecommendation() {
+        return new RecommendedBookDto(bookService.getPageOfRecommendedBooks(0, 20).getContent());
     }
 
     @ModelAttribute(value = "bookDataPagePopular")
-    public List<Book> getBookDataPopular() {
-        return booksRatingAndPopularService.getBooksByRatingAndPopular(0,20);
+    public AbstractBooksDto getBookDataPopular() {
+        return new PopularBooksDto(booksRatingAndPopularService.getBooksByRatingAndPopular(0,20).getContent());
     }
 
     @ModelAttribute(value = "bookDataRecent")
-    public List<Book> getBookDataPageRecent() {
-        return bookService.getPageOfRecentBooks(null, null, 0, 20).getContent();
+    public AbstractBooksDto getBookDataPageRecent() {
+        return new RecentBooksDto(bookService.getPageOfRecentBooks(null, null,0, 20).getContent());
     }
 
     @ModelAttribute(value = "dataForCloud")
@@ -52,16 +51,6 @@ public class MainPageController {
     @GetMapping("")
     public String mainPage() {
         return "/index";
-    }
-
-    @GetMapping("/postponed")
-    public String postponedPage() {
-        return "postponed";
-    }
-
-    @GetMapping("/cart")
-    public String cartPage() {
-        return "cart";
     }
 
     @GetMapping("/signin")
@@ -113,36 +102,6 @@ public class MainPageController {
 
     @PostMapping("/approveContact")
     public String approveContact() {
-        //TODO:
-        return null;
-    }
-
-    @PostMapping("/bookReview")
-    public String bookReview() {
-        //TODO:
-        return null;
-    }
-
-    @PostMapping("/changeBookStatus")
-    public String changeBookStatus() {
-        //TODO:
-        return null;
-    }
-
-    @PostMapping("/rateBookReview")
-    public String rateBookReview() {
-        //TODO:
-        return null;
-    }
-
-    @PostMapping("/rateBook")
-    public String rateBook() {
-        //TODO:
-        return null;
-    }
-
-    @GetMapping("/search")
-    public String search() {
         //TODO:
         return null;
     }
