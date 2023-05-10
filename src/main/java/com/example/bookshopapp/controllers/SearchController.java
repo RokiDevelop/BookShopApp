@@ -16,4 +16,10 @@ public class SearchController {
     public String searchApi(){
         return "";
     }
+
+    @GetMapping("/search")
+    public String search() {
+        //TODO:
+        return null;
+    }
 }

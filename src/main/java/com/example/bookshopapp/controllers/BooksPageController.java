@@ -34,12 +34,13 @@ public class BooksPageController {
     private final GenreService genreService;
     private final TagService tagService;
     private final ResourceStorage storage;
+    private final BookRatingService ratingService;
 
 
     @Autowired
     public BooksPageController(BookService bookService,
                                BookReviewService reviewService, AuthorService authorService,
-                               BooksRatingAndPopularService popularService, GenreService genreService, TagService tagService, ResourceStorage storage) {
+                               BooksRatingAndPopularService popularService, GenreService genreService, TagService tagService, ResourceStorage storage, BookRatingService ratingService) {
         this.bookService = bookService;
         this.reviewService = reviewService;
         this.authorService = authorService;
@@ -47,6 +48,7 @@ public class BooksPageController {
         this.genreService = genreService;
         this.tagService = tagService;
         this.storage = storage;
+        this.ratingService = ratingService;
     }
 
     @GetMapping("/recent")
@@ -116,6 +118,7 @@ public class BooksPageController {
         model.addAttribute("reviewList", reviewDtoList);
         model.addAttribute("book", book);
         model.addAttribute("authors", authors);
+        model.addAttribute("ratingData", ratingService.getRatingByBookId(book.getId()));
 
         return "books/slug";
     }

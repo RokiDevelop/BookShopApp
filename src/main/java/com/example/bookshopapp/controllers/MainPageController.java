@@ -106,24 +106,6 @@ public class MainPageController {
         return null;
     }
 
-    @PostMapping("/changeBookStatus")
-    public String changeBookStatus() {
-        //TODO:
-        return null;
-    }
-
-    @PostMapping("/rateBook")
-    public String rateBook() {
-        //TODO:
-        return null;
-    }
-
-    @GetMapping("/search")
-    public String search() {
-        //TODO:
-        return null;
-    }
-
     @GetMapping("/main/api")
     @ApiOperation("")
     public String mainApi() {

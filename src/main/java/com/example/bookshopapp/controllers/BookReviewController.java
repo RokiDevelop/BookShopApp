@@ -17,12 +17,10 @@ import java.util.List;
 @Controller
 public class BookReviewController {
     private final BookReviewService bookReviewService;
-    private final BookReviewLikeService bookReviewLikeService;
     private final BookService bookService;
 
-    public BookReviewController(BookReviewService bookReviewService, BookReviewLikeService bookReviewLikeService, BookService bookService) {
+    public BookReviewController(BookReviewService bookReviewService, BookService bookService) {
         this.bookReviewService = bookReviewService;
-        this.bookReviewLikeService = bookReviewLikeService;
         this.bookService = bookService;
     }
 
