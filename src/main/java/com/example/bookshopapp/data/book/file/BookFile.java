@@ -3,7 +3,9 @@ package com.example.bookshopapp.data.book.file;
 import com.example.bookshopapp.data.Book;
 import com.example.bookshopapp.data.enums.BookFileType;
 import io.swagger.annotations.ApiModel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,12 +14,15 @@ import javax.persistence.*;
 @Table(name = "book_file")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(description = "data model of book file entity", value = "BookFile")
 public class BookFile {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    Integer id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_file_seq")
+    @SequenceGenerator(name = "book_file_seq", allocationSize = 1)
+    private int id;
 
     @Column(name = "hash", columnDefinition = "VARCHAR(255)", nullable = false)
     private String hash;

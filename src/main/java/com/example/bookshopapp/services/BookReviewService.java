@@ -56,7 +56,6 @@ public class BookReviewService {
 
     public void saveReview(Integer bookId, Integer userId, LocalDateTime time, String text) {
         BookReviewEntity bookReviewEntity = new BookReviewEntity();
-        bookReviewEntity.setId((int) (bookReviewRepository.count() + 1));
         bookReviewEntity.setBookId(bookId);
         bookReviewEntity.setUserId(userId);
         bookReviewEntity.setText(text);

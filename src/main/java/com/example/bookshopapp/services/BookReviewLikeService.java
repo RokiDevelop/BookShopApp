@@ -19,7 +19,6 @@ public class BookReviewLikeService {
 
    public void saveBookReviewLike(Integer reviewId, Integer userId, LocalDateTime time, Short value){
       BookReviewLikeEntity bookReviewLikeEntity = new BookReviewLikeEntity();
-      bookReviewLikeEntity.setId((int) (reviewLikeRepository.count() + 1));
       bookReviewLikeEntity.setReviewId(reviewId);
       bookReviewLikeEntity.setTime(time);
       bookReviewLikeEntity.setValue(value);

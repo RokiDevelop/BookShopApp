@@ -1,7 +1,9 @@
 package com.example.bookshopapp.data.book.review;
 
 import io.swagger.annotations.ApiModel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,11 +13,14 @@ import java.time.LocalDateTime;
 @Table(name = "message")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(description = "data model of message entity", value ="Message")
 public class MessageEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "message_seq")
+    @SequenceGenerator(name = "message_seq", allocationSize = 1)
     private int id;
 
     @Column(columnDefinition = "TIMESTAMP(6) NOT NULL")

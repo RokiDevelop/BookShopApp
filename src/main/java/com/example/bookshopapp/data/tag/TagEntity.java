@@ -14,8 +14,10 @@ import java.util.Set;
 @Getter
 @Setter
 public class TagEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tag_seq")
+    @SequenceGenerator(name = "tag_seq", allocationSize = 1)
     private Long id;
 
     private String name;

@@ -17,7 +17,8 @@ import java.util.Objects;
 public class GenreEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genre_seq")
+    @SequenceGenerator(name = "genre_seq", allocationSize = 1)
     private Integer id;
 
     @Column(columnDefinition = "INT")

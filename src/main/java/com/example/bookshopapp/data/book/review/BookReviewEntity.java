@@ -17,8 +17,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @ApiModel(description = "data model of book review entity" , value ="BookReview")
 public class BookReviewEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_review_seq")
+    @SequenceGenerator(name = "book_review_seq", allocationSize = 1)
     private int id;
 
     @Column(columnDefinition = "INT NOT NULL")
