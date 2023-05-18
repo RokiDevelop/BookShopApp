@@ -19,8 +19,7 @@ import java.time.LocalDateTime;
 public class Book2UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_2_user_seq")
-    @SequenceGenerator(name = "book_2_user_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(columnDefinition = "TIMESTAMP(6) NOT NULL")

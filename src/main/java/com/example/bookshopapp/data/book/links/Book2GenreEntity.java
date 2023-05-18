@@ -18,9 +18,8 @@ import javax.persistence.*;
 public class Book2GenreEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_2_genre_seq")
-    @SequenceGenerator(name = "book_2_genre_seq", allocationSize = 1)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(columnDefinition = "INT NOT NULL")
     private Integer bookId;

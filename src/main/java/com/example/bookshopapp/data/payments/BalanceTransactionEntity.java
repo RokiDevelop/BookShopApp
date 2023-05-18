@@ -19,8 +19,7 @@ import java.time.LocalDateTime;
 public class BalanceTransactionEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "balance_transaction_seq")
-    @SequenceGenerator(name = "balance_transaction_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(columnDefinition = "INT NOT NULL")

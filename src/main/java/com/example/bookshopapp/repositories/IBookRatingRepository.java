@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public interface IBookRatingRepository extends JpaRepository<BookRating, Long> {
+public interface IBookRatingRepository extends JpaRepository<BookRating, Integer> {
     List<BookRating> findBookRatingsByBookId(Integer id);
 
     BookRating findBookRatingByUserAndBook(UserEntity user, Book book);
@@ -24,5 +24,5 @@ public interface IBookRatingRepository extends JpaRepository<BookRating, Long> {
     @Modifying
     @Transactional
     @Query(value = "update BookRating set value = :value where id = :id")
-    void updateValueById(@Param("id") Long id, @Param("value") byte value);
+    void updateValueById(@Param("id") Integer id, @Param("value") byte value);
 }

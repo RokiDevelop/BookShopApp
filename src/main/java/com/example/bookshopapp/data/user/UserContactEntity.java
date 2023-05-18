@@ -20,8 +20,7 @@ import java.time.LocalDateTime;
 public class UserContactEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_contact_seq")
-    @SequenceGenerator(name = "user_contact_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(columnDefinition = "INT NOT NULL")

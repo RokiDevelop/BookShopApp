@@ -18,8 +18,7 @@ import javax.persistence.*;
 public class BookFileTypeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_file_type_seq")
-    @SequenceGenerator(name = "book_file_type_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(columnDefinition = "VARCHAR(255) NOT NULL")

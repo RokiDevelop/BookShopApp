@@ -19,8 +19,7 @@ import java.time.LocalDateTime;
 public class MessageEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "message_seq")
-    @SequenceGenerator(name = "message_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(columnDefinition = "TIMESTAMP(6) NOT NULL")

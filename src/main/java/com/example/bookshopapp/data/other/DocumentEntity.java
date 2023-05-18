@@ -18,8 +18,7 @@ import javax.persistence.*;
 public class DocumentEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "document_seq")
-    @SequenceGenerator(name = "document_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(columnDefinition = "INT NOT NULL  DEFAULT 0")

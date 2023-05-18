@@ -18,8 +18,7 @@ import javax.persistence.*;
 public class FaqEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "faq_seq")
-    @SequenceGenerator(name = "faq_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(columnDefinition = "INT NOT NULL  DEFAULT 0")

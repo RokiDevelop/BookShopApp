@@ -21,9 +21,8 @@ import javax.persistence.*;
 public class Book2TagEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_2_tag_seq")
-    @SequenceGenerator(name = "book_2_tag_seq", allocationSize = 1)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "book_id")

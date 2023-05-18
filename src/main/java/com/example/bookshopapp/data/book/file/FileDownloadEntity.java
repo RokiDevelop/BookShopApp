@@ -18,8 +18,7 @@ import javax.persistence.*;
 public class FileDownloadEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "file_download_seq")
-    @SequenceGenerator(name = "file_download_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "user_id", columnDefinition = "INT NOT NULL")

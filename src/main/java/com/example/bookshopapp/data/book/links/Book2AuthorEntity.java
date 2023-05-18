@@ -21,8 +21,7 @@ import javax.persistence.*;
 public class Book2AuthorEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_2_author_seq")
-    @SequenceGenerator(name = "book_2_author_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne

@@ -18,8 +18,7 @@ import javax.persistence.*;
 public class Book2UserTypeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_2_user_type_seq")
-    @SequenceGenerator(name = "book_2_user_type_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(columnDefinition = "VARCHAR(255) NOT NULL")

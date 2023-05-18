@@ -19,8 +19,7 @@ import java.time.LocalDateTime;
 public class BookReviewEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_review_seq")
-    @SequenceGenerator(name = "book_review_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(columnDefinition = "INT NOT NULL")

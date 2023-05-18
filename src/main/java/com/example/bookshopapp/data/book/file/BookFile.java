@@ -20,8 +20,7 @@ import javax.persistence.*;
 public class BookFile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_file_seq")
-    @SequenceGenerator(name = "book_file_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "hash", columnDefinition = "VARCHAR(255)", nullable = false)

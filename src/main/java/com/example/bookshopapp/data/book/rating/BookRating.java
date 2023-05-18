@@ -19,9 +19,8 @@ import java.time.LocalDateTime;
 public class BookRating {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_rating_seq")
-    @SequenceGenerator(name = "book_rating_seq", allocationSize = 1)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
