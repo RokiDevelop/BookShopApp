@@ -17,10 +17,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table(name = "book_rating", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "book_id"}))
 public class BookRating {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

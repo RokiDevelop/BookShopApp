@@ -1,7 +1,9 @@
 package com.example.bookshopapp.data.book.file;
 
 import io.swagger.annotations.ApiModel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import javax.persistence.*;
 @Table(name = "book_file_type")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(description = "data model of book file type entity",value = "BookFileType")
 public class BookFileTypeEntity {
 

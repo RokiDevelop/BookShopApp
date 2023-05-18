@@ -1,7 +1,9 @@
 package com.example.bookshopapp.data.book.file;
 
 import io.swagger.annotations.ApiModel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import javax.persistence.*;
 @Table(name = "file_download")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(description = "data model of file download entity", value = "FileDownload")
 public class FileDownloadEntity {
 
@@ -17,7 +21,7 @@ public class FileDownloadEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(columnDefinition = "INT NOT NULL")
+    @Column(name = "user_id", columnDefinition = "INT NOT NULL")
     private int userId;
 
     @Column(columnDefinition = "INT NOT NULL")

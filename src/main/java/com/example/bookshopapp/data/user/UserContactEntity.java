@@ -2,7 +2,9 @@ package com.example.bookshopapp.data.user;
 
 import com.example.bookshopapp.data.enums.ContactType;
 import io.swagger.annotations.ApiModel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import java.time.LocalDateTime;
 @Table(name = "user_contact")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(description = "data model of user contact entity", value = "UserContact")
 public class UserContactEntity {
 
