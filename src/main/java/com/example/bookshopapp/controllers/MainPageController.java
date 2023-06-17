@@ -53,11 +53,6 @@ public class MainPageController {
         return "/index";
     }
 
-    @GetMapping("/signin")
-    public String signinPage() {
-        return "signin";
-    }
-
     @GetMapping("/about")
     public String aboutPage() {
         return "about";
@@ -73,11 +68,6 @@ public class MainPageController {
         return "contacts";
     }
 
-    @GetMapping("/profile")
-    public String profilePage() {
-        return "profile";
-    }
-
     @GetMapping("/transactions")
     public String transactions() {
         //TODO:
@@ -89,22 +79,6 @@ public class MainPageController {
         return "redirect:/";
     }
 
-    @GetMapping("/my")
-    public String my() {
-        return "my";
-    }
-
-    @PostMapping("/requestContactConfirmation")
-    public String requestContactConfirmation() {
-        //TODO:
-        return null;
-    }
-
-    @PostMapping("/approveContact")
-    public String approveContact() {
-        //TODO:
-        return null;
-    }
 
     @GetMapping("/main/api")
     @ApiOperation("")
