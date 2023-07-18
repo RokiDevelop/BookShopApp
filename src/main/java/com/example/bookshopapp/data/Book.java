@@ -1,6 +1,7 @@
 package com.example.bookshopapp.data;
 
 import com.example.bookshopapp.data.book.file.BookFile;
+import com.example.bookshopapp.data.book.links.Book2UserEntity;
 import com.example.bookshopapp.data.tag.TagEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -69,6 +70,9 @@ public class Book {
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<TagEntity> tags = new HashSet<>();
+
+    @OneToMany(mappedBy = "book")
+    private List<Book2UserEntity> bookToUserEntities;
 
     public Integer discountPrice() {
         return price - price * discount / 100;

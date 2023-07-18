@@ -5,6 +5,7 @@ import com.example.bookshopapp.data.book.review.BookReviewLikeEntity;
 import com.example.bookshopapp.data.dto.BookReviewDto;
 import com.example.bookshopapp.repositories.IBookReviewLikeRepository;
 import com.example.bookshopapp.repositories.IBookReviewRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,11 +19,11 @@ public class BookReviewService {
     private final IBookReviewRepository bookReviewRepository;
     private final IBookReviewLikeRepository bookReviewLikeRepository;
 
+    @Autowired
     public BookReviewService(IBookReviewLikeRepository bookReviewLikeRepository, IBookReviewRepository bookReviewRepository) {
         this.bookReviewLikeRepository = bookReviewLikeRepository;
         this.bookReviewRepository = bookReviewRepository;
     }
-
 
     public List<BookReviewDto> getBookReview(Integer bookId) {
         List<BookReviewDto> reviewDtoList = new ArrayList<>();
@@ -61,5 +62,9 @@ public class BookReviewService {
         bookReviewEntity.setText(text);
         bookReviewEntity.setTime(time);
         bookReviewRepository.save(bookReviewEntity);
+    }
+
+    public Integer getBookIdByReviewId(Integer reviewId) {
+        return bookReviewRepository.findFirstById(reviewId).getBookId();
     }
 }

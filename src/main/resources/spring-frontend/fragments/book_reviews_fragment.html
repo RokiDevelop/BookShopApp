@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="reviewBlock (reviewList)">
+
     <div class="Comments" th:each="review : ${reviewList}">
+        <!--/*@thymesVar id="review" type="com.example.bookshopapp.data.dto.BookReviewDto"*/-->
         <div class="Comment">
             <div class="Comment-column Comment-column_pict">
                 <div class="Comment-avatar">
                 </div>
             </div>
-            <!--/*@thymesVar id="review" type="com.example.bookshopapp.data.dto.BookReviewDto"*/-->
+
             <div class="Comment-column">
                 <header class="Comment-header">
                     <div>
@@ -59,7 +61,7 @@
                     </div>
                 </header>
                 <div class="Comment-content">
-                    <p th:text="${review.bookReviewEntity.text}">
+                    <p th:text="${review.getBookReviewEntity().id}+ ' ' +${review.bookReviewEntity.text}">
                     </p>
                     <div class="Comment-footer">
                         <div class="Comment-appeal">

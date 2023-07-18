@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/genres")
 @Api(description = "genres data")
 public class GenresPageController {
-
     private final GenreService genreService;
 
     @Autowired
@@ -34,7 +33,6 @@ public class GenresPageController {
     public String genresPage(){
         return "genres/index";
     }
-
 
     @GetMapping("/api")
     @ApiOperation("method to get list of genres")

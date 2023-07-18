@@ -4,7 +4,6 @@ import com.example.bookshopapp.data.Book;
 import com.example.bookshopapp.data.book.rating.BookRating;
 import com.example.bookshopapp.data.book.rating.RatingDto;
 import com.example.bookshopapp.data.user.UserEntity;
-import com.example.bookshopapp.repositories.BookRepository;
 import com.example.bookshopapp.repositories.IBookRatingRepository;
 import com.example.bookshopapp.repositories.IUserRepository;
 import com.example.bookshopapp.repositories.JpaBookRepository;

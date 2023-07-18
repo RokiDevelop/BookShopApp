@@ -19,7 +19,6 @@ import java.util.Map;
 @RequestMapping("/authors")
 @Api(description = "authors data")
 public class AuthorsPageController {
-
     private final AuthorService authorService;
     private final BookService bookService;
 
@@ -41,11 +40,11 @@ public class AuthorsPageController {
 
     @GetMapping(value = "/{id}")
     public String authors(@PathVariable(value = "id") Integer authorId,
-                                    @RequestParam(value = "offset", required = false) Integer offset,
-                                    @RequestParam(value = "limit", required = false) Integer limit,
-                                    Model model) {
+                          @RequestParam(value = "offset", required = false) Integer offset,
+                          @RequestParam(value = "limit", required = false) Integer limit,
+                          Model model) {
         Author author = authorService.getAuthorById(authorId);
-        AbstractBooksDto booksDto =  new BookDto( bookService.getPageBooksByAuthor(author, offset, limit).getContent());
+        AbstractBooksDto booksDto = new BookDto(bookService.getPageBooksByAuthor(author, offset, limit).getContent());
 
         model.addAttribute("author", author);
         model.addAttribute("booksData", booksDto);

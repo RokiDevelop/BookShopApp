@@ -23,12 +23,10 @@ public class DocumentPageController {
         return "documents/index";
     }
 
-
     @GetMapping("/{id}")
     public String documentById(@PathVariable(value = "id") int id, Model model) {
         return "documents/slug";
     }
-
 
     @GetMapping("/api")
     @ResponseBody
@@ -37,5 +35,4 @@ public class DocumentPageController {
         //TODO
         return new ArrayList<>();
     }
-
 }

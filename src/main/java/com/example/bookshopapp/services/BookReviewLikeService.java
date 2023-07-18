@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 @Service
 public class BookReviewLikeService {
-
    private final IBookReviewLikeRepository reviewLikeRepository;
 
    @Autowired

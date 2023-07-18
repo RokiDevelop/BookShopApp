@@ -10,5 +10,5 @@ import java.util.List;
 public interface IBookReviewRepository extends JpaRepository<BookReviewEntity, Integer> {
     List<BookReviewEntity> findBookReviewEntitiesByBookId(Integer bookId);
 
-
+    BookReviewEntity findFirstById(Integer id);
 }

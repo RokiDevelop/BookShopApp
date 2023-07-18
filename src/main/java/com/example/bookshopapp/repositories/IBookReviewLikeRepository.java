@@ -10,5 +10,4 @@ import java.util.List;
 public interface IBookReviewLikeRepository extends JpaRepository<BookReviewLikeEntity, Integer> {
 
     List<BookReviewLikeEntity> findBookReviewLikeEntitiesByReviewId(Integer reviewId);
-
 }

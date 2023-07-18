@@ -6,7 +6,8 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
                    http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="Roman (generated)" id="1684229216731-23">
+
+    <changeSet author="Roman (generated)" id="1684229216731-23" failOnError="false">
         <createTable tableName="author">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -21,7 +22,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-24">
+    <changeSet author="Roman (generated)" id="1684229216731-24" failOnError="false">
         <createTable tableName="balance_transaction">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -43,7 +44,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-25">
+    <changeSet author="Roman (generated)" id="1684229216731-25" failOnError="false">
         <createTable tableName="book">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -70,7 +71,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-26">
+    <changeSet author="Roman (generated)" id="1684229216731-26" failOnError="false">
         <createTable tableName="book2author">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -86,7 +87,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-27">
+    <changeSet author="Roman (generated)" id="1684229216731-27" failOnError="false">
         <createTable tableName="book2genre">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -99,7 +100,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-28">
+    <changeSet author="Roman (generated)" id="1684229216731-28" failOnError="false">
         <createTable tableName="book2tag">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -112,7 +113,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-29">
+    <changeSet author="Roman (generated)" id="1684229216731-29" failOnError="false">
         <createTable tableName="book2user">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -131,7 +132,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-30">
+    <changeSet author="Roman (generated)" id="1684229216731-30" failOnError="false">
         <createTable tableName="book2user_type">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -144,7 +145,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-31">
+    <changeSet author="Roman (generated)" id="1684229216731-31" failOnError="false">
         <createTable tableName="book_file">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -161,7 +162,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-32">
+    <changeSet author="Roman (generated)" id="1684229216731-32" failOnError="false">
         <createTable tableName="book_file_type">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -172,7 +173,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-33">
+    <changeSet author="Roman (generated)" id="1684229216731-33" failOnError="false">
         <createTable tableName="book_rating">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -191,7 +192,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-34">
+    <changeSet author="Roman (generated)" id="1684229216731-34" failOnError="false">
         <createTable tableName="book_review">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -210,7 +211,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-35">
+    <changeSet author="Roman (generated)" id="1684229216731-35" failOnError="false">
         <createTable tableName="book_review_like">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -229,7 +230,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-36">
+    <changeSet author="Roman (generated)" id="1684229216731-36" failOnError="false">
         <createTable tableName="document">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -248,7 +249,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-37">
+    <changeSet author="Roman (generated)" id="1684229216731-37" failOnError="false">
         <createTable tableName="faq">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -264,7 +265,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-38">
+    <changeSet author="Roman (generated)" id="1684229216731-38" failOnError="false">
         <createTable tableName="file_download">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -280,7 +281,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-39">
+    <changeSet author="Roman (generated)" id="1684229216731-39" failOnError="false">
         <createTable tableName="genre">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -294,7 +295,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-40">
+    <changeSet author="Roman (generated)" id="1684229216731-40" failOnError="false">
         <createTable tableName="message">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -313,7 +314,20 @@
             <column name="user_id" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-41">
+    <changeSet author="Roman (generated)" id="1684229216731-41" failOnError="false">
+        <createTable tableName="jwt_token_entity">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_blocked" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jwt_string" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1684229216731-42" failOnError="false">
         <createTable tableName="tag">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -321,7 +335,7 @@
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-42">
+    <changeSet author="Roman (generated)" id="1684229216731-43" failOnError="false">
         <createTable tableName="user_contact">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -343,7 +357,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-43">
+    <changeSet author="Roman (generated)" id="1684229216731-44" failOnError="false">
         <createTable tableName="users">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -360,6 +374,24 @@
             <column name="reg_time" type="TIMESTAMP(6) WITHOUT TIME ZONE">
                 <constraints nullable="false"/>
             </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1684229216731-45" failOnError="false">
+        <createTable tableName="users_data_security">
+            <column autoIncrement="true" name="id" type="INT">
+            </column>
+            <column name="auth_type" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="phone" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1684229216731-46" failOnError="false">
+        <createTable tableName="user2user_data_security">
+            <column autoIncrement="true" name="id" type="INT"/>
+            <column name="user_data_security" type="INT"/>
+            <column name="user_entity" type="INT"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

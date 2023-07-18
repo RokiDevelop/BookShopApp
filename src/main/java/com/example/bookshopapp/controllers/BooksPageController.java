@@ -26,7 +26,6 @@ import java.util.logging.Logger;
 @RequestMapping("/books")
 @Api(description = "books data")
 public class BooksPageController {
-
     private final BookService bookService;
     private final BookReviewService reviewService;
     private final BooksRatingAndPopularService popularService;
@@ -35,7 +34,6 @@ public class BooksPageController {
     private final TagService tagService;
     private final ResourceStorage storage;
     private final BookRatingService ratingService;
-
 
     @Autowired
     public BooksPageController(BookService bookService,
@@ -58,7 +56,7 @@ public class BooksPageController {
                              @RequestParam(value = "limit", required = false) Integer limit,
                              Model model) {
 
-        AbstractBooksDto booksDto =  new PopularBooksDto(bookService.getPageOfRecentBooks(
+        AbstractBooksDto booksDto = new PopularBooksDto(bookService.getPageOfRecentBooks(
                 optDateFrom, optDateTo, offset, limit).getContent());
         model.addAttribute("bookDataRecent", booksDto);
         return "books/recent";
@@ -72,9 +70,9 @@ public class BooksPageController {
         int currentOffset = offset == null ? 0 : offset;
         int currentLimit = limit == null ? 20 : limit;
 
-        AbstractBooksDto booksDto =  new PopularBooksDto(popularService.getBooksByRatingAndPopular(currentOffset, currentLimit).getContent());
+        AbstractBooksDto booksDto = new PopularBooksDto(popularService.getBooksByRatingAndPopular(currentOffset, currentLimit).getContent());
 
-        model.addAttribute("bookDataPopular",booksDto);
+        model.addAttribute("bookDataPopular", booksDto);
 
         return "books/popular";
     }
@@ -91,7 +89,7 @@ public class BooksPageController {
                                 @RequestParam("limit") Optional<Integer> limit,
                                 Model model) {
         Author author = authorService.getAuthorById(authorId);
-        AbstractBooksDto booksDto =  new BookDto( bookService.getPageBooksByAuthor(author, offset.orElse(0), limit.orElse(20)).getContent());
+        AbstractBooksDto booksDto = new BookDto(bookService.getPageBooksByAuthor(author, offset.orElse(0), limit.orElse(20)).getContent());
 
         model.addAttribute("author", author);
         model.addAttribute("booksData", booksDto);
@@ -100,8 +98,8 @@ public class BooksPageController {
 
 
     @GetMapping("/genre/{id}")
-    public String genresById(@PathVariable(value = "id") Integer id, Model model){
-        AbstractBooksDto booksDto =  new BookDto( bookService.getBooksByGenreId(id, null, null).getContent());
+    public String genresById(@PathVariable(value = "id") Integer id, Model model) {
+        AbstractBooksDto booksDto = new BookDto(bookService.getBooksByGenreId(id, null, null).getContent());
 
         model.addAttribute("category", genreService.getGenreById(id).getName());
         model.addAttribute("booksData", booksDto);
@@ -121,11 +119,6 @@ public class BooksPageController {
         model.addAttribute("ratingData", ratingService.getRatingByBookId(book.getId()));
 
         return "books/slug";
-    }
-
-    @GetMapping("/my")
-    public String my() {
-        return "books/slugmy";
     }
 
     @GetMapping("/tag/{id}")
@@ -156,18 +149,18 @@ public class BooksPageController {
     }
 
     @GetMapping("/download/{hash}")
-    public ResponseEntity<ByteArrayResource> bookFile(@PathVariable("hash")String hash) throws IOException{
+    public ResponseEntity<ByteArrayResource> bookFile(@PathVariable("hash") String hash) throws IOException {
         Path path = storage.getBookFilePath(hash);
-        Logger.getLogger(this.getClass().getSimpleName()).info("book file path: "+path);
+        Logger.getLogger(this.getClass().getSimpleName()).info("book file path: " + path);
 
         MediaType mediaType = storage.getBookFileMime(hash);
-        Logger.getLogger(this.getClass().getSimpleName()).info("book file mime type: "+mediaType);
+        Logger.getLogger(this.getClass().getSimpleName()).info("book file mime type: " + mediaType);
 
         byte[] data = storage.getBookFileByteArray(hash);
-        Logger.getLogger(this.getClass().getSimpleName()).info("book file data len: "+data.length);
+        Logger.getLogger(this.getClass().getSimpleName()).info("book file data len: " + data.length);
 
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename="+path.getFileName().toString())
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + path.getFileName().toString())
                 .contentType(mediaType)
                 .contentLength(data.length)
                 .body(new ByteArrayResource(data));
