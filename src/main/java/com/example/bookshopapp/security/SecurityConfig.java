@@ -1,6 +1,9 @@
 package com.example.bookshopapp.security;
 
+import com.example.bookshopapp.security.jwt.CustomLogoutHandler;
 import com.example.bookshopapp.security.jwt.JWTRequestFilter;
+import com.example.bookshopapp.security.oauth.CustomOAuth2UserService;
+import com.example.bookshopapp.security.oauth.OAuthLoginSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +12,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -17,14 +19,25 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-
-    private final BookstoreUserDetailService bookStoreUserDetailService;
+    private final CustomOAuth2UserService oauth2UserService;
+    private final OAuthLoginSuccessHandler oauthLoginSuccessHandler;
+    private final DatabaseLoginSuccessHandler databaseLoginSuccessHandler;
+    private final CustomLogoutHandler customLogoutHandler;
+    private final UserDataSecurityDetailService userDataSecurityDetailService;
     private final JWTRequestFilter filter;
 
     @Autowired
-    public SecurityConfig(BookstoreUserDetailService bookStoreUserDetailService, JWTRequestFilter filter) {
-        this.bookStoreUserDetailService = bookStoreUserDetailService;
+    public SecurityConfig(CustomOAuth2UserService oauth2UserService,
+                          OAuthLoginSuccessHandler oauthLoginSuccessHandler,
+                          DatabaseLoginSuccessHandler databaseLoginSuccessHandler,
+                          CustomLogoutHandler customLogoutHandler,
+                          UserDataSecurityDetailService userDataSecurityDetailService,
+                          JWTRequestFilter filter) {
+        this.oauth2UserService = oauth2UserService;
+        this.oauthLoginSuccessHandler = oauthLoginSuccessHandler;
+        this.databaseLoginSuccessHandler = databaseLoginSuccessHandler;
+        this.customLogoutHandler = customLogoutHandler;
+        this.userDataSecurityDetailService = userDataSecurityDetailService;
         this.filter = filter;
     }
 
@@ -42,26 +55,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(bookStoreUserDetailService)
+                .userDetailsService(userDataSecurityDetailService)
                 .passwordEncoder(getPasswordEncoder());
-
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/my","/profile").authenticated()//.hasRole("USER")
-                .antMatchers("/**").permitAll()
+                .authorizeRequests().antMatchers("/my", "/profile")
+                .authenticated()//.hasRole("USER")
+                .antMatchers("/**")
+                .permitAll()
                 .and().formLogin()
-                .loginPage("/signin").failureUrl("/signin")
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/signin").deleteCookies("token")
+                .loginPage("/signin")
+                .successHandler(databaseLoginSuccessHandler)
+                .defaultSuccessUrl("/my")
+                .failureUrl("/logout")
+                .permitAll()
+                .and().logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/signin")
+                .logoutSuccessHandler(customLogoutHandler)
+                .deleteCookies("token")
+                .permitAll()
                 .and().oauth2Login()
-                .and().oauth2Client();
+                .loginPage("/login")
+                .userInfoEndpoint()
+                .userService(oauth2UserService)
+                .and().successHandler(oauthLoginSuccessHandler)
+                .and().oauth2Client()
+                .and().exceptionHandling()
+                .accessDeniedPage("/403");
 
 //        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
     }
-
 }

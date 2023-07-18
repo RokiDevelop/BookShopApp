@@ -1,5 +1,7 @@
 package com.example.bookshopapp.data.book.links;
 
+import com.example.bookshopapp.data.Book;
+import com.example.bookshopapp.data.user.UserEntity;
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,9 +30,11 @@ public class Book2UserEntity {
     @Column(columnDefinition = "INT NOT NULL")
     private int typeId;
 
-    @Column(columnDefinition = "INT NOT NULL")
-    private int bookId;
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
 
-    @Column(columnDefinition = "INT NOT NULL")
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 }

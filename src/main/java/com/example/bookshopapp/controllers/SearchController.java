@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/search")
 @Api
 public class SearchController {
-
     @GetMapping("/api")
     @ApiOperation("")
     public String searchApi(){

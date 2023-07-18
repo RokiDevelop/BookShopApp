@@ -315,6 +315,19 @@
         </createTable>
     </changeSet>
     <changeSet author="Roman (generated)" id="1684229216731-41" failOnError="false">
+        <createTable tableName="jwt_token_entity">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_blocked" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jwt_string" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1684229216731-42" failOnError="false">
         <createTable tableName="tag">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -322,7 +335,7 @@
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-42" failOnError="false">
+    <changeSet author="Roman (generated)" id="1684229216731-43" failOnError="false">
         <createTable tableName="user_contact">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -344,7 +357,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Roman (generated)" id="1684229216731-43" failOnError="false">
+    <changeSet author="Roman (generated)" id="1684229216731-44" failOnError="false">
         <createTable tableName="users">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -361,6 +374,24 @@
             <column name="reg_time" type="TIMESTAMP(6) WITHOUT TIME ZONE">
                 <constraints nullable="false"/>
             </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1684229216731-45" failOnError="false">
+        <createTable tableName="users_data_security">
+            <column autoIncrement="true" name="id" type="INT">
+            </column>
+            <column name="auth_type" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="phone" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Roman (generated)" id="1684229216731-46" failOnError="false">
+        <createTable tableName="user2user_data_security">
+            <column autoIncrement="true" name="id" type="INT"/>
+            <column name="user_data_security" type="INT"/>
+            <column name="user_entity" type="INT"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

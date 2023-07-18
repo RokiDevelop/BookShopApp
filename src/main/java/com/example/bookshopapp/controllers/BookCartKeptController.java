@@ -17,7 +17,6 @@ import java.util.StringJoiner;
 @Controller
 @RequestMapping("/books")
 public class BookCartKeptController {
-
     private final BookService bookService;
 
     @Autowired
@@ -34,7 +33,6 @@ public class BookCartKeptController {
     public List<Book> bookKept() {
         return new ArrayList<>();
     }
-
 
     @PostMapping("/changeBookStatus/{slug}")
     public String handleChangeBookStatus(@PathVariable("slug") String slug,

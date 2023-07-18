@@ -34,7 +34,7 @@ public class GenreService {
         List<GenreNode> genreNodes = new ArrayList<>();
         map.forEach((genreEntity, books) -> genreNodes.add(new GenreNode(genreEntity, books.size())));
 
-        GenreEntity rootGenre = new GenreEntity(0, null,"", "root");
+        GenreEntity rootGenre = new GenreEntity(0, null, "", "root");
         GenreNode rootGenreNode = new GenreNode(rootGenre, 0);
 
         rootGenreNode.addChildren(rootGenreNode, genreNodes, 0);
@@ -54,7 +54,7 @@ public class GenreService {
                                         .toList())));
     }
 
-    private List<Book2GenreEntity> getListBook2GenreEntity(){
+    private List<Book2GenreEntity> getListBook2GenreEntity() {
         return genreRepository.getBookWithGenre();
     }
 

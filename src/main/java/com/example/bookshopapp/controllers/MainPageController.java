@@ -15,11 +15,9 @@ import java.util.List;
 @Controller
 @Api
 public class MainPageController {
-
     private final TagService tagService;
     private final BookService bookService;
     private final BooksRatingAndPopularService booksRatingAndPopularService;
-
 
     @Autowired
     public MainPageController(TagService tagService, BookService bookService, BooksRatingAndPopularService booksRatingAndPopularService) {

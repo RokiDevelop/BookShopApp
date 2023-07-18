@@ -1,38 +1,39 @@
 package com.example.bookshopapp.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
-public class BookStoreUserDetails implements UserDetails {
 
-    private final BookstoreUser bookstoreUser;
+public class UserDataSecurityDetails implements UserDetails {
 
-    public BookStoreUserDetails(BookstoreUser bookstoreUser) {
-        this.bookstoreUser = bookstoreUser;
+    private final UserDataSecurity userDataSecurity;
+
+    public UserDataSecurityDetails(UserDataSecurity userDataSecurity) {
+        this.userDataSecurity = userDataSecurity;
     }
 
-    public BookstoreUser getBookstoreUser() {
-        return bookstoreUser;
+    public UserDataSecurity getUserDataSecurity() {
+        return userDataSecurity;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
     public String getPassword() {
-        return bookstoreUser.getPassword();
+        return userDataSecurity.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return bookstoreUser.getEmail();
+        return userDataSecurity.getEmail();
     }
 
     @Override
