@@ -1,0 +1,22 @@
+version: '2'
+services:
+  book-shop-server:
+    container_name: book-shop-container
+    build:
+      dockerfile: Dockerfile
+    image: book-shop-api:latest
+    ports:
+      - 8085:8085
+    networks:
+      - spring-cloud-networks
+  postgres:
+    image: postgres:15.4
+    environment:
+      POSTGRES_DB: bookshop_pg
+      POSTGRES_USER: ${SPRING_DATASOURCE_USERNAME}
+      POSTGRES_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+    ports:
+      - "5432:5432"
+networks:
+  spring-cloud-networks:
+    driver: bridge
