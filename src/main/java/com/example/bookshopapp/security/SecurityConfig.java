@@ -4,6 +4,7 @@ import com.example.bookshopapp.security.jwt.CustomLogoutHandler;
 import com.example.bookshopapp.security.jwt.JWTRequestFilter;
 import com.example.bookshopapp.security.oauth.CustomOAuth2UserService;
 import com.example.bookshopapp.security.oauth.OAuthLoginSuccessHandler;
+import com.example.bookshopapp.security.services.UserDataSecurityDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final CustomLogoutHandler customLogoutHandler;
     private final UserDataSecurityDetailService userDataSecurityDetailService;
     private final JWTRequestFilter filter;
+    private final ExampleAuthenticationSuccessHandler exampleAuthenticationSuccessHandler;
 
     @Autowired
     public SecurityConfig(CustomOAuth2UserService oauth2UserService,
@@ -32,13 +34,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                           DatabaseLoginSuccessHandler databaseLoginSuccessHandler,
                           CustomLogoutHandler customLogoutHandler,
                           UserDataSecurityDetailService userDataSecurityDetailService,
-                          JWTRequestFilter filter) {
+                          JWTRequestFilter filter, ExampleAuthenticationSuccessHandler exampleAuthenticationSuccessHandler) {
         this.oauth2UserService = oauth2UserService;
         this.oauthLoginSuccessHandler = oauthLoginSuccessHandler;
         this.databaseLoginSuccessHandler = databaseLoginSuccessHandler;
         this.customLogoutHandler = customLogoutHandler;
         this.userDataSecurityDetailService = userDataSecurityDetailService;
         this.filter = filter;
+        this.exampleAuthenticationSuccessHandler = exampleAuthenticationSuccessHandler;
     }
 
     @Bean
@@ -61,34 +64,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+       http
                 .csrf().disable()
                 .authorizeRequests().antMatchers("/my", "/profile")
                 .authenticated()//.hasRole("USER")
                 .antMatchers("/**")
                 .permitAll()
-                .and().formLogin()
-                .loginPage("/signin")
-                .successHandler(databaseLoginSuccessHandler)
-                .defaultSuccessUrl("/my")
-                .failureUrl("/logout")
-                .permitAll()
-                .and().logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/signin")
-                .logoutSuccessHandler(customLogoutHandler)
-                .deleteCookies("token")
-                .permitAll()
-                .and().oauth2Login()
-                .loginPage("/login")
-                .userInfoEndpoint()
-                .userService(oauth2UserService)
+                .and()
+                .formLogin()
+                    .loginPage("/signin")
+                    .successHandler(databaseLoginSuccessHandler)
+                    .defaultSuccessUrl("/")
+                    .failureUrl("/logout")
+                    .permitAll()
+                .and()
+                .logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/signin")
+                    .logoutSuccessHandler(customLogoutHandler)
+                    .deleteCookies("token")
+                    .permitAll()
+                .and()
+                .oauth2Login()
+                    .loginPage("/login")
+                    .userInfoEndpoint()
+                    .userService(oauth2UserService)
                 .and().successHandler(oauthLoginSuccessHandler)
                 .and().oauth2Client()
                 .and().exceptionHandling()
                 .accessDeniedPage("/403");
 
 //        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+        http
+                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
     }
 }

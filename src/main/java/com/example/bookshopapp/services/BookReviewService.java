@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
@@ -52,7 +53,7 @@ public class BookReviewService {
         Stream<BookReviewDto> sorted = reviewDtoList.stream()
                 .sorted(Comparator.comparing(BookReviewDto::getRating).reversed());
 
-        return sorted.toList();
+        return sorted.collect(Collectors.toList());
     }
 
     public void saveReview(Integer bookId, Integer userId, LocalDateTime time, String text) {

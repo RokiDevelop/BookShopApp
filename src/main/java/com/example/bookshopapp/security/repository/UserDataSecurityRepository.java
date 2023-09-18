@@ -1,5 +1,7 @@
-package com.example.bookshopapp.security;
+package com.example.bookshopapp.security.repository;
 
+import com.example.bookshopapp.security.data.AuthenticationType;
+import com.example.bookshopapp.security.data.UserDataSecurity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,9 +1,9 @@
-package com.example.bookshopapp.services;
+package com.example.bookshopapp.security.services;
 
 import com.example.bookshopapp.data.book.links.User2UserDataSecurity;
 import com.example.bookshopapp.data.user.UserEntity;
-import com.example.bookshopapp.repositories.User2UserDataSecurityRepository;
-import com.example.bookshopapp.security.UserDataSecurity;
+import com.example.bookshopapp.security.repository.User2UserDataSecurityRepository;
+import com.example.bookshopapp.security.data.UserDataSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class User2UserDataSecurityService {
         return user2UserDataSecurity.orElseThrow().getUserEntity();
     }
 
-    public void save(User2UserDataSecurity user2UserDataSecurity) {
-        user2UserDataSecurityRepository.save(user2UserDataSecurity);
+    public User2UserDataSecurity save(User2UserDataSecurity user2UserDataSecurity) {
+        return user2UserDataSecurityRepository.save(user2UserDataSecurity);
     }
 }

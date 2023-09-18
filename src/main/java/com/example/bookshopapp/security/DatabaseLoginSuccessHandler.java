@@ -1,5 +1,7 @@
 package com.example.bookshopapp.security;
 
+import com.example.bookshopapp.security.data.UserDataSecurityDetails;
+import com.example.bookshopapp.security.services.UserDataSecurityDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;

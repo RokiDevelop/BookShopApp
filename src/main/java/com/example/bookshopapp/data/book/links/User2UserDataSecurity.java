@@ -1,7 +1,7 @@
 package com.example.bookshopapp.data.book.links;
 
 import com.example.bookshopapp.data.user.UserEntity;
-import com.example.bookshopapp.security.UserDataSecurity;
+import com.example.bookshopapp.security.data.UserDataSecurity;
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

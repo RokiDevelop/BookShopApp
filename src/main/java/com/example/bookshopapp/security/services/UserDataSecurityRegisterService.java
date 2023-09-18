@@ -1,9 +1,9 @@
-package com.example.bookshopapp.security;
+package com.example.bookshopapp.security.services;
 
 import com.example.bookshopapp.data.book.links.User2UserDataSecurity;
 import com.example.bookshopapp.data.user.UserEntity;
+import com.example.bookshopapp.security.data.*;
 import com.example.bookshopapp.security.jwt.JWTUtil;
-import com.example.bookshopapp.services.User2UserDataSecurityService;
 import com.example.bookshopapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -45,24 +45,37 @@ public class UserDataSecurityRegisterService {
         this.jwtUtil = jwtUtil;
     }
 
-    public void registerNewUser(RegistrationForm registrationForm) {
+    public User2UserDataSecurity registerNewUser(RegistrationForm registrationForm) {
         if (userDataSecurityService.findUserDataSecurityByEmail(registrationForm.getEmail()) == null) {
-            UserDataSecurity userDataSecurity = new UserDataSecurity(
-                    registrationForm.getName(), registrationForm.getEmail(),
-                    registrationForm.getPhone(), passwordEncoder.encode(registrationForm.getPass()));
-            userDataSecurityService.save(userDataSecurity);
-
-            UserEntity user = new UserEntity(
-                    registrationForm.getName(),
-                    LocalDateTime.now(),
-                    registrationForm.getName() + LocalDateTime.now().getYear() +
-                            LocalDateTime.now().getDayOfYear() + LocalDateTime.now().getNano(),
-                    0);
+            UserDataSecurity userDataSecurity = saveNewUserDataSecurity(registrationForm);
+            UserEntity user = saveNewUserEntity(registrationForm);
 
             User2UserDataSecurity user2UserDataSecurity = new User2UserDataSecurity(user, userDataSecurity);
-            userService.save(user);
             user2UserDataSecurityService.save(user2UserDataSecurity);
+            return user2UserDataSecurity;
         }
+
+        throw new IllegalArgumentException("New user was not saved");
+    }
+
+    private UserDataSecurity saveNewUserDataSecurity(RegistrationForm registrationForm) {
+        UserDataSecurity userDataSecurity = new UserDataSecurity(
+                registrationForm.getName(), registrationForm.getEmail(),
+                registrationForm.getPhone(), passwordEncoder.encode(registrationForm.getPass()));
+        userDataSecurityService.save(userDataSecurity);
+        return userDataSecurity;
+    }
+
+    private UserEntity saveNewUserEntity(RegistrationForm registrationForm) {
+        UserEntity user =
+                new UserEntity(
+                        registrationForm.getName(),
+                        LocalDateTime.now(),
+                        registrationForm.getName() + LocalDateTime.now().getYear() +
+                                LocalDateTime.now().getDayOfYear() + LocalDateTime.now().getNano(),
+                        0);
+        userService.save(user);
+        return user;
     }
 
     public ContactConfirmationResponse login(ContactConfirmationPayload payload) {
@@ -88,24 +101,21 @@ public class UserDataSecurityRegisterService {
         return response;
     }
 
-    public Object getCurrentUser() {
+    public UserDataSecurity getCurrentUser() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication auth = securityContext.getAuthentication();
-        Object object = auth.getPrincipal();
 
-
-        if (auth.getClass() == OAuth2AuthenticationToken.class) {
+        if (auth instanceof OAuth2AuthenticationToken) {
             return getUserDataSecurityByOAuth2AuthenticationToken(auth);
         } else {
-            return getUserDataSecurityByUserDataSecurityDetails((UserDataSecurityDetails) object);
+            return getUserDataSecurityByUserDataSecurityDetails((UserDataSecurityDetails) auth.getPrincipal());
         }
     }
 
     private UserDataSecurity getUserDataSecurityByOAuth2AuthenticationToken(Authentication auth) {
         UserDataSecurity userDataSecurity = new UserDataSecurity();
         OAuth2AuthenticationToken authenticationToken = (OAuth2AuthenticationToken) auth;
-        userDataSecurity.setId(Integer.valueOf(authenticationToken.getAuthorizedClientRegistrationId()));
-        userDataSecurity.setName(authenticationToken.getName());
+        userDataSecurity.setName(authenticationToken.getPrincipal().getAttribute("name"));
         userDataSecurity.setEmail(authenticationToken.getPrincipal().getAttribute("email"));
         userDataSecurity.setPhone(authenticationToken.getPrincipal().getAttribute("phone"));
         userDataSecurity.setPassword(authenticationToken.getPrincipal().getAttribute("pass"));

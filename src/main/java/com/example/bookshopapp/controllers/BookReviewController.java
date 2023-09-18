@@ -2,7 +2,7 @@ package com.example.bookshopapp.controllers;
 
 import com.example.bookshopapp.data.Book;
 import com.example.bookshopapp.data.dto.BookReviewDto;
-import com.example.bookshopapp.security.UserDataSecurityDetails;
+import com.example.bookshopapp.security.data.UserDataSecurityDetails;
 import com.example.bookshopapp.services.BookReviewService;
 import com.example.bookshopapp.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
