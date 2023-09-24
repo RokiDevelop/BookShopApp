@@ -1,6 +1,6 @@
 package com.example.bookshopapp.controllers;
 
-import com.example.bookshopapp.security.UserDataSecurityDetails;
+import com.example.bookshopapp.security.data.UserDataSecurityDetails;
 import com.example.bookshopapp.services.BookReviewLikeService;
 import com.example.bookshopapp.services.BookReviewService;
 import com.example.bookshopapp.services.BookService;

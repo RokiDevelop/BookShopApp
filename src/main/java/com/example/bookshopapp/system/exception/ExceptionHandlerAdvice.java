@@ -41,6 +41,12 @@ public class ExceptionHandlerAdvice {
                 "Provider argument are invalid, see data for details", map);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    Result handleInvalidInputData(IllegalArgumentException ex) {
+        return new Result(false,StatusCode.INVALID_ARGUMENT, "Incorrect input data!", ex.getMessage());
+    }
+
     @ExceptionHandler({UsernameNotFoundException.class, BadCredentialsException.class})
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     Result handleAuthenticationException(Exception ex) {
@@ -58,6 +64,8 @@ public class ExceptionHandlerAdvice {
     Result handleAccessDeniedException(AccessDeniedException ex) {
         return new Result(false, StatusCode.UNAUTHORIZED, "Access is denied", ex.getMessage());
     }
+
+
 }
 
 

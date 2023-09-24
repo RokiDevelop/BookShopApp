@@ -1,5 +1,7 @@
-package com.example.bookshopapp.security;
+package com.example.bookshopapp.security.services;
 
+import com.example.bookshopapp.security.data.UserDataSecurity;
+import com.example.bookshopapp.security.repository.UserDataSecurityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +19,12 @@ public class UserDataSecurityService {
     public UserDataSecurity findUserDataSecurityByEmail(String email) {
         return userDataSecurityRepository.findUserDataSecurityByEmail(email);
     }
+    public UserDataSecurity findUserDataSecurityByPhone(String phone) {
+        return userDataSecurityRepository.findUserDataSecurityByPhone(phone);
+    }
 
-    public void save(UserDataSecurity user) {
-        userDataSecurityRepository.save(user);
+    public UserDataSecurity save(UserDataSecurity user) {
+        return userDataSecurityRepository.save(user);
     }
 
     public UserDataSecurity findUserDataSecurity(Integer id) {

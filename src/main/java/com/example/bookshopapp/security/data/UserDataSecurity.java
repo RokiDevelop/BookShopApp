@@ -1,4 +1,4 @@
-package com.example.bookshopapp.security;
+package com.example.bookshopapp.security.data;
 
 import com.example.bookshopapp.data.book.links.User2UserDataSecurity;
 import lombok.AllArgsConstructor;
@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+
 
 @Entity
 @Table(name = "users_data_security")
@@ -29,7 +30,7 @@ public class UserDataSecurity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "auth_type")

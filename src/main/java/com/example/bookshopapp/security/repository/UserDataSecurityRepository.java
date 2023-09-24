@@ -1,5 +1,7 @@
-package com.example.bookshopapp.security;
+package com.example.bookshopapp.security.repository;
 
+import com.example.bookshopapp.security.data.AuthenticationType;
+import com.example.bookshopapp.security.data.UserDataSecurity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,11 +13,11 @@ import java.util.Optional;
 public interface UserDataSecurityRepository extends JpaRepository<UserDataSecurity, Integer> {
     UserDataSecurity findUserDataSecurityByEmail(String email);
 
-    UserDataSecurity findUserDataSecurityByPhone(String username);
+    UserDataSecurity findUserDataSecurityByPhone(String phone);
 
     @Modifying
     @Query("UPDATE UserDataSecurity u SET u.authType = ?2 WHERE u.email = ?1")
-    void updateAuthenticationType(String userEmail, AuthenticationType authType);
+    Optional<UserDataSecurity> updateAuthenticationType(String userEmail, AuthenticationType authType);
 
     @Override
     Optional<UserDataSecurity> findById(Integer integer);

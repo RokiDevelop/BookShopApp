@@ -1,5 +1,7 @@
 package com.example.bookshopapp.security;
 
+import com.example.bookshopapp.security.data.UserDataSecurityDetails;
+import com.example.bookshopapp.security.services.UserDataSecurityDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -23,7 +25,7 @@ public class DatabaseLoginSuccessHandler extends SavedRequestAwareAuthentication
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws ServletException, IOException {
         UserDataSecurityDetails userDataSecurityDetailService = (UserDataSecurityDetails) authentication.getPrincipal();
-        userService.updateAuthenticationType(userDataSecurityDetailService.getUsername(), "database");
+        userService.updateAuthenticationType(userDataSecurityDetailService.getEmail(), "database");
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }

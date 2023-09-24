@@ -4,13 +4,13 @@ package com.example.bookshopapp.repositories;
 import com.example.bookshopapp.data.Book;
 import com.example.bookshopapp.data.book.rating.BookRating;
 import com.example.bookshopapp.data.user.UserEntity;
+import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
