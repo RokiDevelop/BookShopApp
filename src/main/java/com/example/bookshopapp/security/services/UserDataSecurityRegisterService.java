@@ -46,13 +46,13 @@ public class UserDataSecurityRegisterService {
     }
 
     public User2UserDataSecurity registerNewUser(RegistrationForm registrationForm) {
-        if (userDataSecurityService.findUserDataSecurityByEmail(registrationForm.getEmail()) == null) {
+        if (userDataSecurityService.findUserDataSecurityByEmail(registrationForm.getEmail()) == null &&
+                userDataSecurityService.findUserDataSecurityByPhone(registrationForm.getPhone()) == null) {
             UserDataSecurity userDataSecurity = saveNewUserDataSecurity(registrationForm);
             UserEntity user = saveNewUserEntity(registrationForm);
 
             User2UserDataSecurity user2UserDataSecurity = new User2UserDataSecurity(user, userDataSecurity);
-            user2UserDataSecurityService.save(user2UserDataSecurity);
-            return user2UserDataSecurity;
+            return user2UserDataSecurityService.save(user2UserDataSecurity);
         }
 
         throw new IllegalArgumentException("New user was not saved");

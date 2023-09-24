@@ -14,12 +14,6 @@ public class ExampleAuthenticationSuccessHandler extends SimpleUrlAuthentication
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        try {
             super.onAuthenticationSuccess(request, response, authentication);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

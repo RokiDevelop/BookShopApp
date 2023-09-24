@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 public class UserDataSecurityDetailService implements UserDetailsService {
@@ -37,8 +39,9 @@ public class UserDataSecurityDetailService implements UserDetailsService {
         throw new UsernameNotFoundException("user " + username + " not found doh!");
     }
 
-    public void updateAuthenticationType(String userEmail, String oauth2ClientName) {
+    public boolean updateAuthenticationType(String userEmail, String oauth2ClientName) {
         AuthenticationType authType = AuthenticationType.valueOf(oauth2ClientName.toUpperCase());
-        userDataSecurityRepository.updateAuthenticationType(userEmail, authType);
+        Optional<UserDataSecurity> optionalI = userDataSecurityRepository.updateAuthenticationType(userEmail, authType);
+        return optionalI.isPresent();
     }
 }

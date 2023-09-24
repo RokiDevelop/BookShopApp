@@ -19,6 +19,9 @@ public class UserDataSecurityService {
     public UserDataSecurity findUserDataSecurityByEmail(String email) {
         return userDataSecurityRepository.findUserDataSecurityByEmail(email);
     }
+    public UserDataSecurity findUserDataSecurityByPhone(String phone) {
+        return userDataSecurityRepository.findUserDataSecurityByPhone(phone);
+    }
 
     public UserDataSecurity save(UserDataSecurity user) {
         return userDataSecurityRepository.save(user);

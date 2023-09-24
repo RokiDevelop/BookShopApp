@@ -1,6 +1,6 @@
 package com.example.bookshopapp.security.data;
 
-import com.example.bookshopapp.security.data.UserDataSecurity;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,17 +8,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-
+@Getter
 public class UserDataSecurityDetails implements UserDetails {
 
-    private final UserDataSecurity userDataSecurity;
+    private UserDataSecurity userDataSecurity;
 
     public UserDataSecurityDetails(UserDataSecurity userDataSecurity) {
         this.userDataSecurity = userDataSecurity;
-    }
-
-    public UserDataSecurity getUserDataSecurity() {
-        return userDataSecurity;
     }
 
     @Override
@@ -33,7 +29,15 @@ public class UserDataSecurityDetails implements UserDetails {
 
     @Override
     public String getUsername() {
+            return userDataSecurity.getName();
+    }
+
+    public String getEmail() {
         return userDataSecurity.getEmail();
+    }
+
+    public String getPhone() {
+        return userDataSecurity.getPhone();
     }
 
     @Override

@@ -13,11 +13,11 @@ import java.util.Optional;
 public interface UserDataSecurityRepository extends JpaRepository<UserDataSecurity, Integer> {
     UserDataSecurity findUserDataSecurityByEmail(String email);
 
-    UserDataSecurity findUserDataSecurityByPhone(String username);
+    UserDataSecurity findUserDataSecurityByPhone(String phone);
 
     @Modifying
     @Query("UPDATE UserDataSecurity u SET u.authType = ?2 WHERE u.email = ?1")
-    void updateAuthenticationType(String userEmail, AuthenticationType authType);
+    Optional<UserDataSecurity> updateAuthenticationType(String userEmail, AuthenticationType authType);
 
     @Override
     Optional<UserDataSecurity> findById(Integer integer);

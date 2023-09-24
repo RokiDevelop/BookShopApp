@@ -28,7 +28,7 @@ public class BookRatingService {
         this.bookRepository = bookRepository;
     }
 
-    public void saveBookRating(Integer userId, Integer bookId, LocalDateTime time, Byte value) {
+    public BookRating saveBookRating(Integer userId, Integer bookId, LocalDateTime time, Byte value) {
         UserEntity user = userRepository.getReferenceById(userId);
         Book book = bookRepository.getReferenceById(bookId);
 
@@ -36,10 +36,10 @@ public class BookRatingService {
 
         if (bookRating != null) {
             ratingRepository.updateValueById(bookRating.getId(), value);
-            return;
+            return bookRating;
         }
 
-        ratingRepository.save(new BookRating(user,book,time,value));
+        return ratingRepository.save(new BookRating(user,book,time,value));
     }
 
     public RatingDto getRatingByBookId(int id) {
