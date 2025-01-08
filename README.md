@@ -1,5 +1,5 @@
 # Book Shop Project
-This is the README file for the "Investment API" project.
+This is the README file for the "BookShop API" project.
 
 The Book Shop project is an online bookstore where users can register, log in, browse a list of popular books, explore recommended reads, check out the latest arrivals, mark books as favorites, and add them to their cart. Users can also rate and review books. The user interface is implemented using Thymeleaf.
 
